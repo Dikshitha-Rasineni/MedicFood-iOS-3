@@ -19,7 +19,12 @@ concurrency:
 jobs:
   build-and-test:
     name: Build and test
-    runs-on: macos-15
+    # macos-26, not macos-15. The app deploys to iOS 17 but compiles against the
+    # iOS 26 SDK: LiquidGlass.swift refers to `Glass`, which only exists there.
+    # `#available(iOS 26.0, *)` gates that at runtime, not at compile time, so an
+    # older SDK fails with "cannot find type 'Glass' in scope" no matter how the
+    # call is guarded. The runner image has to carry the SDK the team builds on.
+    runs-on: macos-26
 
     steps:
       - uses: actions/checkout@v4
