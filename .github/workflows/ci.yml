@@ -66,8 +66,29 @@ jobs:
         # architectural rule, so CI enforces it rather than trusting review.
         if: always()
         run: |
-          if grep -rl "import SwiftUI" MedicFood/ViewModels/ 2>/dev/null; then
-            echo "::error::A ViewModel imports SwiftUI. ViewModels hold state and logic; Views decide how it looks. See README."
+          set -euo pipefail
+
+          # Collect view models by shape, not by one hardcoded path. The old
+          # check read MedicFood/ViewModels/, which stopped existing when the
+          # features moved into Screens/<Feature>/ViewModels/ — grep then found
+          # nothing, reported success and enforced nothing for days.
+          FILES=$(find MedicFood \( -path "*/ViewModels/*.swift" -o -name "*ViewModel*.swift" \) | sort -u)
+
+          # A rule that cannot find anything to check has failed, not passed.
+          # This is what silently broke last time, so it is now an error.
+          if [ -z "$FILES" ]; then
+            echo "::error::Found no ViewModel files under MedicFood/. This check is looking in the wrong place — fix its paths rather than deleting it."
             exit 1
           fi
+
+          echo "Checking $(echo "$FILES" | wc -l | tr -d ' ') view models."
+
+          OFFENDERS=$(echo "$FILES" | xargs grep -l "^import SwiftUI" || true)
+          if [ -n "$OFFENDERS" ]; then
+            echo "$OFFENDERS" | while read -r f; do
+              echo "::error file=$f::$f imports SwiftUI. ViewModels hold state and logic; Views decide how it looks. See README."
+            done
+            exit 1
+          fi
+
           echo "No ViewModel imports SwiftUI."
