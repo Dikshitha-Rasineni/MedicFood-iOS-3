@@ -5,7 +5,10 @@ struct MedicineDetailView: View {
     let medicine: Medicine
     let model: MedicineListViewModel
 
+    @Environment(ServiceContainer.self) private var services
+
     @State private var isEditing = false
+    @State private var food: MedicineFoodViewModel?
     @State private var voice = VoiceController()
     @State private var previewImage: UIImage?
     @State private var testMessage: String?
@@ -57,6 +60,8 @@ struct MedicineDetailView: View {
                 Section("Instructions") { Text(instructions) }
                     .listRowBackground(Theme.Colors.cardSurface)
             }
+
+            foodSection(item)
 
             imagesSection(item)
 
@@ -130,6 +135,62 @@ struct MedicineDetailView: View {
         }
     }
 
+    // MARK: - Food and drink
+
+    /// What to eat and what to avoid with this medicine.
+    ///
+    /// The whole point of the app, and until now it lived only on a separate
+    /// screen the user had to search by hand. The name is normalised before
+    /// lookup — see `DrugNameNormalizer` — because a prescription and the
+    /// catalogue spell the same drug differently.
+    @ViewBuilder
+    private func foodSection(_ item: Medicine) -> some View {
+        Section {
+            switch food?.state ?? .idle {
+            case .idle, .loading:
+                HStack(spacing: 10) {
+                    ProgressView().tint(Theme.Colors.primary)
+                    Text("Checking food interactions…")
+                        .font(Theme.Typography.caption)
+                        .foregroundStyle(Theme.Colors.textSecondary)
+                }
+
+            case .found(let interactions, let matched):
+                ForEach(interactions) { interaction in
+                    FoodInteractionRow(interaction: interaction)
+                }
+                Text("Matched “\(matched)” in the medicines database.")
+                    .font(.caption2)
+                    .foregroundStyle(Theme.Colors.textSecondary.opacity(0.8))
+
+            case .none(let searched):
+                Label(
+                    "No food interactions recorded for “\(searched)”.",
+                    systemImage: "checkmark.circle"
+                )
+                .font(Theme.Typography.caption)
+                .foregroundStyle(Theme.Colors.textSecondary)
+
+            case .failed(let message):
+                // Never shown as "no interactions": saying a drug is fine with
+                // food because a lookup failed is the dangerous failure here.
+                Label(message, systemImage: "exclamationmark.triangle.fill")
+                    .font(Theme.Typography.caption)
+                    .foregroundStyle(Theme.Colors.missed)
+            }
+        } header: {
+            Text("Food and drink")
+        } footer: {
+            Text("General information only. Always follow your doctor or pharmacist.")
+        }
+        .listRowBackground(Theme.Colors.cardSurface)
+        .task(id: item.id) {
+            let model = food ?? MedicineFoodViewModel(services: services)
+            food = model
+            await model.load(for: item)
+        }
+    }
+
     @ViewBuilder
     private func imagesSection(_ item: Medicine) -> some View {
         let entries: [(String, String?)] = [
@@ -165,6 +226,63 @@ struct MedicineDetailView: View {
                 }
             }
             .listRowBackground(Theme.Colors.cardSurface)
+        }
+    }
+}
+
+/// One food interaction, as severity + food + effect.
+///
+/// Severity is an icon and a word as well as a colour — a colour-only warning
+/// disappears in greyscale and for a colourblind reader, which is not
+/// acceptable for "do not drink alcohol with this".
+struct FoodInteractionRow: View {
+    let interaction: FoodInteraction
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 10) {
+            Image(systemName: symbol)
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundStyle(tint)
+                .frame(width: 20)
+
+            VStack(alignment: .leading, spacing: 3) {
+                HStack(spacing: 6) {
+                    Text(interaction.food)
+                        .font(Theme.Typography.body.weight(.medium))
+                        .foregroundStyle(Theme.Colors.textPrimary)
+
+                    Text(interaction.severity.displayName)
+                        .font(.caption2.weight(.bold))
+                        .textCase(.uppercase)
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .background(tint.opacity(0.14))
+                        .foregroundStyle(tint)
+                        .clipShape(Capsule())
+                }
+
+                Text(interaction.effect)
+                    .font(.footnote)
+                    .foregroundStyle(Theme.Colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(.vertical, 4)
+    }
+
+    private var symbol: String {
+        switch interaction.severity {
+        case .avoid:   "xmark.octagon.fill"
+        case .caution: "exclamationmark.triangle.fill"
+        case .minor:   "checkmark.circle.fill"
+        }
+    }
+
+    private var tint: Color {
+        switch interaction.severity {
+        case .avoid:   Theme.Colors.missed
+        case .caution: Theme.Colors.skipped
+        case .minor:   Theme.Colors.taken
         }
     }
 }
