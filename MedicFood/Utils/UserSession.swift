@@ -37,15 +37,41 @@ final class UserSession {
     ///
     /// The artificial delay is not padding — it gives the splash a beat so the
     /// app does not flash between two screens on a fast device.
-    func restore() async {
+    /// `auth` is the backend's own view of who is signed in. When it keeps a
+    /// session of its own (Firebase does; the mock stack does not) it is the
+    /// authority, and a cached profile it disagrees with is discarded.
+    ///
+    /// Without this the app trusts a stale profile on disk, renders a
+    /// signed-in home screen, and then every per-user read fails — leaving
+    /// someone looking at an empty app with no way to sign in, because as far
+    /// as the UI is concerned they already are.
+    func restore(auth: AuthServicing? = nil) async {
         try? await Task.sleep(for: .milliseconds(600))
 
-        if let data = defaults.data(forKey: Self.profileKey),
-           let profile = try? JSONDecoder().decode(UserProfile.self, from: data) {
-            state = .signedIn(profile)
-        } else {
+        guard let data = defaults.data(forKey: Self.profileKey),
+              let profile = try? JSONDecoder().decode(UserProfile.self, from: data)
+        else {
             state = .signedOut
+            return
         }
+
+        if let auth, auth.validatesSession {
+            guard let backendUserID = auth.currentUserID else {
+                // The backend session is gone — signed out elsewhere, token
+                // revoked, or this profile was left behind by the mock stack.
+                defaults.removeObject(forKey: Self.profileKey)
+                state = .signedOut
+                return
+            }
+            // A cached profile for a different account is equally stale.
+            guard backendUserID == profile.id else {
+                defaults.removeObject(forKey: Self.profileKey)
+                state = .signedOut
+                return
+            }
+        }
+
+        state = .signedIn(profile)
     }
 
     func signIn(_ profile: UserProfile) {

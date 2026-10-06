@@ -1,21 +1,32 @@
 import UIKit
 import UserNotifications
+import FirebaseCore
 
 /// Application lifecycle hooks.
 ///
 /// SwiftUI does not need an `AppDelegate` for most things, but two features
 /// still do: notification delegate callbacks (tapping a reminder while the app
-/// is backgrounded) and, later, Firebase configuration.
-///
-/// When Firebase is wired up, `FirebaseApp.configure()` goes in
-/// `didFinishLaunchingWithOptions` — before anything else runs.
+/// is backgrounded) and Firebase configuration.
 final class AppDelegate: NSObject, UIApplicationDelegate {
 
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
-        // FirebaseApp.configure()   <- add here once GoogleService-Info.plist exists
+        // Before anything else: every Firebase call made during launch needs
+        // the default app to exist already. Guarded because the config file is
+        // gitignored, so a teammate's fresh clone genuinely may not have it —
+        // and crashing on launch would tell them nothing useful.
+        if Bundle.main.url(forResource: "GoogleService-Info", withExtension: "plist") != nil {
+            FirebaseApp.configure()
+        } else if AppConfig.backend == .live {
+            assertionFailure(
+                "AppConfig.backend is .live but GoogleService-Info.plist is missing. "
+                + "Download it from the Firebase console for project medicfood-84cbf "
+                + "and put it in MedicFood/ — it is gitignored, so a pull will not bring it."
+            )
+        }
+
         UNUserNotificationCenter.current().delegate = NotificationDelegate.shared
         return true
     }

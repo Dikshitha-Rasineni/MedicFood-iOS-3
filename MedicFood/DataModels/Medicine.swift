@@ -102,7 +102,7 @@ struct Medicine: Identifiable, Codable, Hashable, Sendable {
     /// a medicine read back from Firestore arrives already adopted.
     mutating func adoptRemoteID(_ remoteID: String) {
         self.remoteID = remoteID
-        self.id = FirestoreSchema.stableUUID(from: remoteID)
+        self.id = FirestoreSchema.identity(forRemoteID: remoteID)
     }
 
     func minutesOfDay(for slot: DoseSlot) -> Int {

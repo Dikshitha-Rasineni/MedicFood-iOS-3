@@ -54,14 +54,34 @@ final class ServiceContainer {
         )
     }
 
-    /// The real stack. Each `Mock…` above gets a `Firebase…` counterpart and
-    /// is swapped in here — nothing else in the app changes.
+    /// The real stack: Firebase project `medicfood-84cbf`, the same backend the
+    /// Android app uses, so data written on either platform appears on both.
     ///
-    /// Not built yet: it needs `GoogleService-Info.plist` from the Firebase
-    /// console. See the README.
+    /// Needs `GoogleService-Info.plist` in `MedicFood/`. It is gitignored, so a
+    /// fresh clone does not have it — see the README.
+    ///
+    /// `NotificationService` is shared with the mock stack on purpose:
+    /// reminders are local to the device and have no backend half.
     static func live() -> ServiceContainer {
-        // TODO: FirebaseAuthService, FirestoreMedicineService, …
-        mock()
+        ServiceContainer(
+            auth: FirebaseAuthService(),
+            medicines: FirestoreMedicineService(),
+            adherence: FirestoreAdherenceService(),
+            notifications: NotificationService(),
+            drugInfo: FirestoreDrugInfoService(),
+            caretakers: FirestoreCaretakerService()
+        )
+    }
+
+    /// Whichever stack `AppConfig.backend` selects.
+    ///
+    /// One switch, in one file, so running a demo on sample data is a one-line
+    /// change rather than an edit spread across the app.
+    static func current() -> ServiceContainer {
+        switch AppConfig.backend {
+        case .mock: mock()
+        case .live: live()
+        }
     }
 }
 

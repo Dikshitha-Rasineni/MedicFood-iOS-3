@@ -31,6 +31,36 @@ final class FirestoreSchemaTests: XCTestCase {
         XCTAssertEqual(uuid.uuid.8 >> 6, 0b10)
     }
 
+    /// A key this app minted is a UUID string and must be used as-is; a key
+    /// Android minted has no UUID in it and must be derived. Getting this
+    /// wrong changes a medicine's id on its first sync and orphans every
+    /// reminder already scheduled for it.
+    func testIdentityUsesTheKeyWhenItIsAlreadyAUUID() {
+        let uuid = UUID()
+        XCTAssertEqual(FirestoreSchema.identity(forRemoteID: uuid.uuidString), uuid)
+
+        let androidKey = "7bQv2mK1xLpR9dNfTz3A"
+        XCTAssertEqual(
+            FirestoreSchema.identity(forRemoteID: androidKey),
+            FirestoreSchema.stableUUID(from: androidKey)
+        )
+    }
+
+    /// The full path a medicine added on iOS takes: saved under its own UUID
+    /// as the document key, then read back. Its identity must survive.
+    func testMedicineCreatedOnIOSKeepsItsIdentityThroughFirestore() throws {
+        let original = Medicine(name: "Aspirin", dosage: "75 mg", slots: [.morning])
+        // FirestoreMedicineService.save uses the UUID string as the key when a
+        // medicine has no remoteID yet.
+        let key = original.id.uuidString
+
+        let fields = FirestoreSchema.fields(for: original)
+        let restored = try XCTUnwrap(FirestoreSchema.medicine(from: fields, remoteID: key))
+
+        XCTAssertEqual(restored.id, original.id, "the id its reminders are keyed by must not change")
+        XCTAssertEqual(restored.remoteID, key)
+    }
+
     // MARK: - Reading a medicine written by Android
 
     /// Exactly what `saveMedicine` puts in the `medicines` map.

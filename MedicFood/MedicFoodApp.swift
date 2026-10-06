@@ -10,9 +10,10 @@ import SwiftUI
 struct MedicFoodApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 
-    /// The one composition root. Swap `.mock` for `.live` here and the whole
-    /// app changes backend without another line moving.
-    @State private var services = ServiceContainer.mock()
+    /// The one composition root. Which stack it builds is decided by
+    /// `AppConfig.backend` — flip that to `.live` for the real Firebase
+    /// backend, leave it `.mock` to demo on sample data.
+    @State private var services = ServiceContainer.current()
 
     @State private var session = UserSession()
 

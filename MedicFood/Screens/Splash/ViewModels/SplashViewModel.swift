@@ -28,21 +28,29 @@ final class SplashViewModel {
 
     private let medicines: MedicineServicing
     private let notifications: NotificationScheduling
+    /// Optional so existing tests can build this without an auth double.
+    private let auth: AuthServicing?
     private let defaults: UserDefaults
     private static let askedKey = "medicfood.hasAskedForNotifications"
 
     init(
         medicines: MedicineServicing,
         notifications: NotificationScheduling,
+        auth: AuthServicing? = nil,
         defaults: UserDefaults = .standard
     ) {
         self.medicines = medicines
         self.notifications = notifications
+        self.auth = auth
         self.defaults = defaults
     }
 
     convenience init(services: ServiceContainer) {
-        self.init(medicines: services.medicines, notifications: services.notifications)
+        self.init(
+            medicines: services.medicines,
+            notifications: services.notifications,
+            auth: services.auth
+        )
     }
 
     /// Restore the session and warm the cache, holding the screen for at least
@@ -59,19 +67,29 @@ final class SplashViewModel {
         phase = .loading
         let began = ContinuousClock.now
 
-        await session.restore()
+        await session.restore(auth: auth)
 
         if !defaults.bool(forKey: Self.askedKey) {
             defaults.set(true, forKey: Self.askedKey)
             _ = await notifications.requestAuthorization()
         }
 
-        do {
-            _ = try await medicines.medicines()
-        } catch {
-            await holdRemainder(since: began)
-            phase = .failed((error as? APIError)?.errorDescription ?? error.localizedDescription)
-            return
+        // Warming the medicine cache only makes sense for a signed-in user.
+        // On the live backend every per-user read throws `.notSignedIn` when
+        // there is no session, and reporting that as "couldn't load your
+        // medicines" sends a first-time user to a retry button instead of the
+        // sign-in screen they actually need. The mock stack never throws, so
+        // this only shows up against Firebase.
+        if case .signedIn = session.state {
+            do {
+                _ = try await medicines.medicines()
+            } catch ServiceError.notSignedIn {
+                // The session expired between restore and this call.
+            } catch {
+                await holdRemainder(since: began)
+                phase = .failed((error as? APIError)?.errorDescription ?? error.localizedDescription)
+                return
+            }
         }
 
         await holdRemainder(since: began)

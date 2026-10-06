@@ -110,9 +110,15 @@ struct SignInView: View {
     }
 
     /// The mock backend accepts anything well-formed, and saying so beats
-    /// leaving someone guessing at a login screen with no account.
+    /// leaving someone guessing at a login screen with no account. On the live
+    /// backend the same sentence would be a lie, so it says what is true there
+    /// instead: the account is the one from the Android app.
     private var hint: some View {
-        Text("Running on sample data — any email and a 6-character password will sign you in.")
+        Text(
+            AppConfig.backend == .mock
+                ? "Running on sample data — any email and a 6-character password will sign you in."
+                : "Use the same account as the MedicFood Android app."
+        )
             .font(.footnote)
             .foregroundStyle(.secondary)
             .multilineTextAlignment(.center)

@@ -10,6 +10,20 @@ protocol AuthServicing: AnyObject {
     func signIn(email: String, password: String) async throws -> UserProfile
     func signUp(name: String, email: String, password: String) async throws -> UserProfile
     func signOut() async throws
+
+    /// Whether this service keeps its own session that the cached profile must
+    /// agree with. False for the mock stack, which has no backend to disagree
+    /// with.
+    var validatesSession: Bool { get }
+
+    /// The user the backend itself considers signed in.
+    var currentUserID: String? { get }
+}
+
+extension AuthServicing {
+    // Defaults so the mock stack — and any test double — is unaffected.
+    var validatesSession: Bool { false }
+    var currentUserID: String? { nil }
 }
 
 /// In-memory auth for development and tests.

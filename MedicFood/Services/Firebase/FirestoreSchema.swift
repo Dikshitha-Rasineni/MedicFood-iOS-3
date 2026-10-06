@@ -88,6 +88,16 @@ enum FirestoreSchema {
     /// So the UUID is *derived* from the Firestore id rather than generated:
     /// the same document always produces the same UUID, on every device and
     /// every launch, with no mapping table to keep.
+    /// The `Medicine.id` that belongs to a given document key.
+    ///
+    /// A key this app minted *is* a UUID string, so it is used as-is and the
+    /// medicine keeps the identity its reminders were scheduled against. A key
+    /// Android minted is a Firestore id, which has no UUID in it, so one is
+    /// derived instead.
+    static func identity(forRemoteID remoteID: String) -> UUID {
+        UUID(uuidString: remoteID) ?? stableUUID(from: remoteID)
+    }
+
     static func stableUUID(from remoteID: String) -> UUID {
         var digest = Array(SHA256.hash(data: Data(remoteID.utf8)).prefix(16))
         // Set the RFC 4122 version (5) and variant bits so the result is a
@@ -143,7 +153,7 @@ enum FirestoreSchema {
         let formText = fields["type"] as? String ?? fields["form"] as? String ?? ""
 
         var medicine = Medicine(
-            id: stableUUID(from: remoteID),
+            id: identity(forRemoteID: remoteID),
             name: name,
             dosage: fields["dosage"] as? String ?? "",
             form: formText.isEmpty ? .tablet : PrescriptionParser.form(from: formText),
@@ -318,7 +328,7 @@ enum FirestoreSchema {
               let day = dayFormatter.date(from: dayText)
         else { return nil }
 
-        let medicineID = stableUUID(from: remoteID)
+        let medicineID = identity(forRemoteID: remoteID)
         let timeText = fields["time"] as? String ?? "08:00"
         let components = timeComponents(from: timeText) ?? (hour: 8, minute: 0)
         let scheduledAt = Calendar.current.date(
