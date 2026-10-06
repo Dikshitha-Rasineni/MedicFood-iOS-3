@@ -1,0 +1,1351 @@
+[
+ {
+  "drugName": "Acarbose",
+  "aliases": [
+   "Glucobay"
+  ],
+  "description": "Slows the digestion of carbohydrates to lower blood sugar after meals.",
+  "foodToAvoid": "NA",
+  "foodToTake": "The first bite of each main meal",
+  "timeToTake": "Take with the first mouthful of each main meal.",
+  "interactingWith": "NA",
+  "searchKey": "A"
+ },
+ {
+  "drugName": "Acetazolamide",
+  "aliases": [
+   "Diamox"
+  ],
+  "description": "Treats glaucoma, altitude sickness and fluid build-up.",
+  "foodToAvoid": "NA",
+  "foodToTake": "Plenty of fluids",
+  "timeToTake": "Take after food.",
+  "interactingWith": "NA",
+  "searchKey": "A"
+ },
+ {
+  "drugName": "Albendazole",
+  "aliases": [
+   "Zentel",
+   "Bandy"
+  ],
+  "description": "Treats worm infections.",
+  "foodToAvoid": "NA",
+  "foodToTake": "A meal containing some fat",
+  "timeToTake": "Take with a fatty meal when treating infections outside the gut.",
+  "interactingWith": "NA",
+  "searchKey": "A"
+ },
+ {
+  "drugName": "Alendronate",
+  "aliases": [
+   "Fosamax",
+   "Alendra"
+  ],
+  "description": "Strengthens bones in osteoporosis.",
+  "foodToAvoid": "Food, coffee, tea and juice at the time of the tablet",
+  "foodToTake": "Plain water only, a full glass",
+  "timeToTake": "Take first thing in the morning, 30 minutes before any food or drink. Stay upright for 30 minutes.",
+  "interactingWith": "Food and other drinks stop alendronate being absorbed, and it can irritate the food pipe.",
+  "searchKey": "A"
+ },
+ {
+  "drugName": "Allopurinol",
+  "aliases": [
+   "Zyloric"
+  ],
+  "description": "Lowers uric acid to prevent gout.",
+  "foodToAvoid": "Alcohol; high-purine foods such as organ meats and some seafood",
+  "foodToTake": "Plenty of water",
+  "timeToTake": "Take after a meal.",
+  "interactingWith": "These raise uric acid and work against the medicine.",
+  "searchKey": "A"
+ },
+ {
+  "drugName": "Alprazolam",
+  "aliases": [
+   "Xanax",
+   "Alprax"
+  ],
+  "description": "Treats anxiety and panic.",
+  "foodToAvoid": "Alcohol; grapefruit juice",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Take exactly as prescribed.",
+  "interactingWith": "Alcohol with alprazolam can slow breathing. Grapefruit raises its levels.",
+  "searchKey": "A"
+ },
+ {
+  "drugName": "Amitriptyline",
+  "aliases": [
+   "Tryptomer",
+   "Elavil"
+  ],
+  "description": "Treats depression and nerve pain.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Usually taken at night, as it causes drowsiness.",
+  "interactingWith": "Alcohol can make low mood and drowsiness worse and adds to side effects.",
+  "searchKey": "A"
+ },
+ {
+  "drugName": "Amlodipine",
+  "aliases": [
+   "Norvasc",
+   "Amlong"
+  ],
+  "description": "Lowers blood pressure.",
+  "foodToAvoid": "Large amounts of grapefruit juice",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Take at the same time each day.",
+  "interactingWith": "Grapefruit juice can raise amlodipine levels slightly, causing dizziness or ankle swelling.",
+  "searchKey": "A"
+ },
+ {
+  "drugName": "Amoxicillin",
+  "aliases": [
+   "Amoxil",
+   "Mox",
+   "Novamox"
+  ],
+  "description": "An antibiotic for bacterial infections.",
+  "foodToAvoid": "NA",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Take with food if it upsets your stomach. Finish the full course.",
+  "interactingWith": "NA",
+  "searchKey": "A"
+ },
+ {
+  "drugName": "Amoxicillin + Clavulanic acid",
+  "aliases": [
+   "Augmentin",
+   "Co-amoxiclav",
+   "Clavam"
+  ],
+  "description": "An antibiotic for bacterial infections.",
+  "foodToAvoid": "NA",
+  "foodToTake": "The start of a meal",
+  "timeToTake": "Take at the start of a meal to improve absorption and reduce nausea.",
+  "interactingWith": "NA",
+  "searchKey": "A"
+ },
+ {
+  "drugName": "Antacid (Aluminium/Magnesium)",
+  "aliases": [
+   "Gelusil",
+   "Digene",
+   "Mylanta"
+  ],
+  "description": "Neutralises stomach acid.",
+  "foodToAvoid": "NA",
+  "foodToTake": "About an hour after meals",
+  "timeToTake": "Take one hour after meals and at bedtime.",
+  "interactingWith": "NA",
+  "searchKey": "A"
+ },
+ {
+  "drugName": "Aspirin",
+  "aliases": [
+   "Ecosprin",
+   "Disprin",
+   "Acetylsalicylic acid"
+  ],
+  "description": "Relieves pain and fever; low doses help prevent blood clots.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "Food and a full glass of water",
+  "timeToTake": "Take after food to reduce stomach irritation.",
+  "interactingWith": "Alcohol increases the risk of stomach irritation and bleeding.",
+  "searchKey": "A"
+ },
+ {
+  "drugName": "Atenolol",
+  "aliases": [
+   "Tenormin"
+  ],
+  "description": "Lowers blood pressure and slows the heart.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Take at the same time each day.",
+  "interactingWith": "Alcohol adds to the blood pressure drop and can cause dizziness.",
+  "searchKey": "A"
+ },
+ {
+  "drugName": "Atorvastatin",
+  "aliases": [
+   "Lipitor",
+   "Atorva",
+   "Storvas"
+  ],
+  "description": "Lowers cholesterol.",
+  "foodToAvoid": "Large amounts of grapefruit juice",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Can be taken at any time of day.",
+  "interactingWith": "Large amounts of grapefruit juice raise atorvastatin levels and the chance of muscle side effects.",
+  "searchKey": "A"
+ },
+ {
+  "drugName": "Azathioprine",
+  "aliases": [
+   "Imuran"
+  ],
+  "description": "Suppresses the immune system.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "Food",
+  "timeToTake": "Take with or after food to reduce nausea.",
+  "interactingWith": "Alcohol adds to the strain on the liver.",
+  "searchKey": "A"
+ },
+ {
+  "drugName": "Azithromycin",
+  "aliases": [
+   "Zithromax",
+   "Azee"
+  ],
+  "description": "An antibiotic for bacterial infections.",
+  "foodToAvoid": "NA",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Take with food if it upsets your stomach.",
+  "interactingWith": "NA",
+  "searchKey": "A"
+ },
+ {
+  "drugName": "Baclofen",
+  "aliases": [
+   "Lioresal"
+  ],
+  "description": "Relieves muscle spasm.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "Food or milk",
+  "timeToTake": "Take with food or milk to reduce stomach upset.",
+  "interactingWith": "Alcohol adds to drowsiness.",
+  "searchKey": "B"
+ },
+ {
+  "drugName": "Bisacodyl",
+  "aliases": [
+   "Dulcolax"
+  ],
+  "description": "A laxative.",
+  "foodToAvoid": "Milk and antacids within an hour of the tablet",
+  "foodToTake": "Water",
+  "timeToTake": "Swallow whole with water. Usually taken at night.",
+  "interactingWith": "Milk and antacids can dissolve the tablet's protective coating too early and cause stomach cramps.",
+  "searchKey": "B"
+ },
+ {
+  "drugName": "Buspirone",
+  "aliases": [
+   "Buspar"
+  ],
+  "description": "Treats anxiety.",
+  "foodToAvoid": "Large amounts of grapefruit juice; alcohol",
+  "foodToTake": "A consistent routine with food",
+  "timeToTake": "Take at the same time each day, either always with or always without food.",
+  "interactingWith": "Grapefruit juice raises buspirone levels and alcohol adds to drowsiness.",
+  "searchKey": "B"
+ },
+ {
+  "drugName": "Calcium carbonate",
+  "aliases": [
+   "Shelcal",
+   "Calcium supplement"
+  ],
+  "description": "Calcium supplement.",
+  "foodToAvoid": "Taking it at the same time as iron or thyroid tablets",
+  "foodToTake": "Meals",
+  "timeToTake": "Take with meals. Space it 4 hours from levothyroxine.",
+  "interactingWith": "Calcium carbonate needs stomach acid, and it blocks the absorption of iron and levothyroxine.",
+  "searchKey": "C"
+ },
+ {
+  "drugName": "Carbamazepine",
+  "aliases": [
+   "Tegretol",
+   "Zen Retard"
+  ],
+  "description": "Treats seizures and nerve pain.",
+  "foodToAvoid": "Grapefruit juice; alcohol",
+  "foodToTake": "Food",
+  "timeToTake": "Take with food at the same times each day.",
+  "interactingWith": "Grapefruit juice raises carbamazepine levels, and alcohol adds to drowsiness.",
+  "searchKey": "C"
+ },
+ {
+  "drugName": "Carbimazole",
+  "aliases": [
+   "Neomercazole",
+   "Methimazole"
+  ],
+  "description": "Treats an overactive thyroid.",
+  "foodToAvoid": "Large amounts of iodine-rich foods such as kelp and seaweed",
+  "foodToTake": "A steady diet",
+  "timeToTake": "Take at the same times each day.",
+  "interactingWith": "Iodine can change how well the medicine works.",
+  "searchKey": "C"
+ },
+ {
+  "drugName": "Cefuroxime",
+  "aliases": [
+   "Zinnat",
+   "Ceftin"
+  ],
+  "description": "An antibiotic for bacterial infections.",
+  "foodToAvoid": "NA",
+  "foodToTake": "Food",
+  "timeToTake": "Take with or just after food, which helps the body absorb it.",
+  "interactingWith": "NA",
+  "searchKey": "C"
+ },
+ {
+  "drugName": "Cetirizine",
+  "aliases": [
+   "Zyrtec",
+   "Cetzine"
+  ],
+  "description": "Relieves allergies.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Take at the same time each day.",
+  "interactingWith": "Alcohol adds to drowsiness.",
+  "searchKey": "C"
+ },
+ {
+  "drugName": "Chlorpheniramine",
+  "aliases": [
+   "CPM",
+   "Piriton"
+  ],
+  "description": "Relieves allergies and colds.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "May cause drowsiness.",
+  "interactingWith": "Alcohol adds to drowsiness.",
+  "searchKey": "C"
+ },
+ {
+  "drugName": "Ciprofloxacin",
+  "aliases": [
+   "Cipro",
+   "Ciplox"
+  ],
+  "description": "An antibiotic for bacterial infections.",
+  "foodToAvoid": "Milk, yoghurt or calcium-fortified juice taken with the tablet; large amounts of caffeine",
+  "foodToTake": "A full glass of water",
+  "timeToTake": "Take at least 2 hours before or 6 hours after antacids, iron or zinc supplements.",
+  "interactingWith": "Calcium binds to ciprofloxacin and stops it being absorbed. It can also make caffeine's effects stronger.",
+  "searchKey": "C"
+ },
+ {
+  "drugName": "Clonazepam",
+  "aliases": [
+   "Rivotril",
+   "Clonotril"
+  ],
+  "description": "Treats seizures and panic.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Take exactly as prescribed.",
+  "interactingWith": "Alcohol with clonazepam can slow breathing and cause severe drowsiness.",
+  "searchKey": "C"
+ },
+ {
+  "drugName": "Clopidogrel",
+  "aliases": [
+   "Plavix",
+   "Clopilet"
+  ],
+  "description": "Prevents blood clots.",
+  "foodToAvoid": "Heavy alcohol",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Take at the same time each day.",
+  "interactingWith": "Alcohol adds to the bleeding risk that clopidogrel already carries.",
+  "searchKey": "C"
+ },
+ {
+  "drugName": "Co-trimoxazole",
+  "aliases": [
+   "Septran",
+   "Bactrim"
+  ],
+  "description": "An antibiotic for bacterial infections.",
+  "foodToAvoid": "NA",
+  "foodToTake": "Plenty of fluids",
+  "timeToTake": "Take with a full glass of water and drink plenty of fluids through the day.",
+  "interactingWith": "NA",
+  "searchKey": "C"
+ },
+ {
+  "drugName": "Colchicine",
+  "aliases": [
+   "Zycolchin",
+   "Colcrys"
+  ],
+  "description": "Treats and prevents gout attacks.",
+  "foodToAvoid": "Grapefruit juice",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Take as directed.",
+  "interactingWith": "Grapefruit juice raises colchicine levels and the risk of side effects.",
+  "searchKey": "C"
+ },
+ {
+  "drugName": "Cyclosporine",
+  "aliases": [
+   "Sandimmune",
+   "Neoral"
+  ],
+  "description": "Prevents organ rejection and treats some immune conditions.",
+  "foodToAvoid": "Grapefruit juice",
+  "foodToTake": "A consistent routine: always with or always without food",
+  "timeToTake": "Take at the same times each day.",
+  "interactingWith": "Grapefruit juice raises cyclosporine levels, which can damage the kidneys.",
+  "searchKey": "C"
+ },
+ {
+  "drugName": "Dexamethasone",
+  "aliases": [
+   "Dexona",
+   "Decadron"
+  ],
+  "description": "A steroid that reduces inflammation.",
+  "foodToAvoid": "Too much salt; alcohol",
+  "foodToTake": "Food",
+  "timeToTake": "Take with food.",
+  "interactingWith": "Steroids make the body hold on to salt and water, so salty food works against them. Alcohol adds to stomach irritation.",
+  "searchKey": "D"
+ },
+ {
+  "drugName": "Diazepam",
+  "aliases": [
+   "Valium",
+   "Calmpose"
+  ],
+  "description": "Treats anxiety and muscle spasm.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Take exactly as prescribed.",
+  "interactingWith": "Alcohol with diazepam can slow breathing and cause severe drowsiness.",
+  "searchKey": "D"
+ },
+ {
+  "drugName": "Diclofenac",
+  "aliases": [
+   "Voveran",
+   "Voltaren"
+  ],
+  "description": "Relieves pain and inflammation.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "Food",
+  "timeToTake": "Take after meals to protect the stomach.",
+  "interactingWith": "Alcohol increases the risk of stomach irritation and bleeding.",
+  "searchKey": "D"
+ },
+ {
+  "drugName": "Digoxin",
+  "aliases": [
+   "Lanoxin"
+  ],
+  "description": "Controls heart rhythm and strengthens the heartbeat.",
+  "foodToAvoid": "Black liquorice; high-fibre bran taken at the same time as the dose",
+  "foodToTake": "A steady, consistent diet",
+  "timeToTake": "Take at the same time each day.",
+  "interactingWith": "Liquorice lowers potassium, which makes digoxin toxic. Bran can reduce how much is absorbed.",
+  "searchKey": "D"
+ },
+ {
+  "drugName": "Domperidone",
+  "aliases": [
+   "Domstal",
+   "Motilium"
+  ],
+  "description": "Relieves nausea and bloating.",
+  "foodToAvoid": "NA",
+  "foodToTake": "Before a meal",
+  "timeToTake": "Take 15 to 30 minutes before meals.",
+  "interactingWith": "NA",
+  "searchKey": "D"
+ },
+ {
+  "drugName": "Doxycycline",
+  "aliases": [
+   "Doxy",
+   "Vibramycin"
+  ],
+  "description": "An antibiotic for bacterial infections and acne.",
+  "foodToAvoid": "Milk, yoghurt, calcium, iron and antacids within 2 to 3 hours of the dose",
+  "foodToTake": "A full glass of water",
+  "timeToTake": "Take with a full glass of water and stay upright for at least 30 minutes.",
+  "interactingWith": "Calcium and iron bind to doxycycline and stop it being absorbed.",
+  "searchKey": "D"
+ },
+ {
+  "drugName": "Enalapril",
+  "aliases": [
+   "Envas",
+   "Vasotec"
+  ],
+  "description": "Lowers blood pressure and protects the heart.",
+  "foodToAvoid": "Potassium-based salt substitutes; large amounts of high-potassium foods",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Take at the same time each day.",
+  "interactingWith": "These medicines raise potassium in the blood. Salt substitutes are made of potassium chloride and can push it too high.",
+  "searchKey": "E"
+ },
+ {
+  "drugName": "Escitalopram",
+  "aliases": [
+   "Lexapro",
+   "Nexito"
+  ],
+  "description": "Treats depression and anxiety.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Take at the same time each day.",
+  "interactingWith": "Alcohol can make low mood and drowsiness worse and adds to side effects.",
+  "searchKey": "E"
+ },
+ {
+  "drugName": "Esomeprazole",
+  "aliases": [
+   "Nexium",
+   "Nexpro"
+  ],
+  "description": "Reduces stomach acid.",
+  "foodToAvoid": "NA",
+  "foodToTake": "An empty stomach, before a meal",
+  "timeToTake": "Take at least one hour before a meal.",
+  "interactingWith": "NA",
+  "searchKey": "E"
+ },
+ {
+  "drugName": "Ferrous sulfate (Iron)",
+  "aliases": [
+   "Iron tablets",
+   "Ferrous fumarate"
+  ],
+  "description": "Treats iron deficiency.",
+  "foodToAvoid": "Tea, coffee, milk and calcium-rich foods within 2 hours",
+  "foodToTake": "Vitamin C-rich foods or orange juice",
+  "timeToTake": "Best on an empty stomach. Take with a little food if it upsets your stomach.",
+  "interactingWith": "Tannins in tea and coffee, and calcium, reduce how much iron is absorbed. Vitamin C increases it.",
+  "searchKey": "F"
+ },
+ {
+  "drugName": "Fexofenadine",
+  "aliases": [
+   "Allegra",
+   "Fexova"
+  ],
+  "description": "Relieves allergies.",
+  "foodToAvoid": "Fruit juices such as grapefruit, orange or apple",
+  "foodToTake": "Water",
+  "timeToTake": "Take with a glass of water, not juice.",
+  "interactingWith": "Fruit juice reduces how much fexofenadine is absorbed, so it works less well.",
+  "searchKey": "F"
+ },
+ {
+  "drugName": "Fluoxetine",
+  "aliases": [
+   "Prozac",
+   "Fludac"
+  ],
+  "description": "Treats depression and anxiety.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Take in the morning.",
+  "interactingWith": "Alcohol can make low mood and drowsiness worse and adds to side effects.",
+  "searchKey": "F"
+ },
+ {
+  "drugName": "Furosemide",
+  "aliases": [
+   "Lasix",
+   "Frusemide"
+  ],
+  "description": "A water tablet that removes extra fluid.",
+  "foodToAvoid": "Too much salt; alcohol",
+  "foodToTake": "Potassium-rich foods such as bananas, if your doctor advises",
+  "timeToTake": "Take in the morning so you are not up at night passing urine.",
+  "interactingWith": "Furosemide removes potassium along with water, and salty food works against it. Ask your doctor before changing your diet.",
+  "searchKey": "F"
+ },
+ {
+  "drugName": "Gabapentin",
+  "aliases": [
+   "Neurontin",
+   "Gabapin"
+  ],
+  "description": "Treats nerve pain and seizures.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Take at the same times each day.",
+  "interactingWith": "Alcohol adds to drowsiness.",
+  "searchKey": "G"
+ },
+ {
+  "drugName": "Glibenclamide",
+  "aliases": [
+   "Glyburide",
+   "Daonil"
+  ],
+  "description": "Lowers blood sugar in type 2 diabetes.",
+  "foodToAvoid": "Skipping meals; alcohol",
+  "foodToTake": "Breakfast or your first main meal",
+  "timeToTake": "Take with breakfast.",
+  "interactingWith": "Taking it and then skipping a meal can cause low blood sugar. Alcohol can also cause low blood sugar.",
+  "searchKey": "G"
+ },
+ {
+  "drugName": "Gliclazide",
+  "aliases": [
+   "Diamicron"
+  ],
+  "description": "Lowers blood sugar in type 2 diabetes.",
+  "foodToAvoid": "Skipping meals; alcohol",
+  "foodToTake": "Breakfast",
+  "timeToTake": "Take with breakfast.",
+  "interactingWith": "Taking it and then skipping a meal can cause low blood sugar. Alcohol can also cause low blood sugar.",
+  "searchKey": "G"
+ },
+ {
+  "drugName": "Glimepiride",
+  "aliases": [
+   "Amaryl"
+  ],
+  "description": "Lowers blood sugar in type 2 diabetes.",
+  "foodToAvoid": "Skipping meals; alcohol",
+  "foodToTake": "Breakfast or your first main meal",
+  "timeToTake": "Take with the first main meal of the day.",
+  "interactingWith": "Taking it and then skipping a meal can cause low blood sugar. Alcohol can also cause low blood sugar.",
+  "searchKey": "G"
+ },
+ {
+  "drugName": "Griseofulvin",
+  "aliases": [
+   "Grisovin",
+   "Fulvicin"
+  ],
+  "description": "An antifungal.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "A meal containing some fat, such as milk",
+  "timeToTake": "Take after a meal that contains some fat.",
+  "interactingWith": "Fat helps the body absorb griseofulvin, and alcohol can cause flushing and a fast heartbeat with it.",
+  "searchKey": "G"
+ },
+ {
+  "drugName": "Hydrochlorothiazide",
+  "aliases": [
+   "HCTZ",
+   "Aquazide"
+  ],
+  "description": "A water tablet that lowers blood pressure.",
+  "foodToAvoid": "Alcohol; too much salt",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Take in the morning.",
+  "interactingWith": "Alcohol can make dizziness worse when standing up, and salty food works against it.",
+  "searchKey": "H"
+ },
+ {
+  "drugName": "Hydroxychloroquine",
+  "aliases": [
+   "HCQ",
+   "Plaquenil"
+  ],
+  "description": "Treats malaria, lupus and rheumatoid arthritis.",
+  "foodToAvoid": "NA",
+  "foodToTake": "Food or milk",
+  "timeToTake": "Take with food or a glass of milk to reduce stomach upset.",
+  "interactingWith": "NA",
+  "searchKey": "H"
+ },
+ {
+  "drugName": "Ibuprofen",
+  "aliases": [
+   "Brufen",
+   "Advil",
+   "Nurofen"
+  ],
+  "description": "Relieves pain, fever and inflammation.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "Food or milk",
+  "timeToTake": "Take with or just after food to protect the stomach.",
+  "interactingWith": "Alcohol increases the risk of stomach irritation and bleeding.",
+  "searchKey": "I"
+ },
+ {
+  "drugName": "Insulin",
+  "aliases": [],
+  "description": "Controls blood sugar in diabetes.",
+  "foodToAvoid": "Skipping or delaying meals; alcohol on an empty stomach",
+  "foodToTake": "Regular meals matched to your insulin",
+  "timeToTake": "Follow the timing your doctor gave you and eat on schedule.",
+  "interactingWith": "Insulin without enough food, or alcohol without food, can cause dangerously low blood sugar.",
+  "searchKey": "I"
+ },
+ {
+  "drugName": "Isoniazid",
+  "aliases": [
+   "INH"
+  ],
+  "description": "An antibiotic used for tuberculosis.",
+  "foodToAvoid": "Alcohol; aged cheese, red wine, and fish such as tuna or skipjack",
+  "foodToTake": "An empty stomach",
+  "timeToTake": "Take one hour before or two hours after a meal. Take with food if it upsets your stomach.",
+  "interactingWith": "These foods can cause flushing, a pounding heartbeat and headache with isoniazid, and alcohol raises the risk of liver damage.",
+  "searchKey": "I"
+ },
+ {
+  "drugName": "Isotretinoin",
+  "aliases": [
+   "Accutane",
+   "Isotroin"
+  ],
+  "description": "Treats severe acne.",
+  "foodToAvoid": "Alcohol; vitamin A supplements",
+  "foodToTake": "A meal that contains some fat",
+  "timeToTake": "Take with a fatty meal, which helps the body absorb it.",
+  "interactingWith": "Alcohol adds to liver strain, and extra vitamin A can cause vitamin A toxicity.",
+  "searchKey": "I"
+ },
+ {
+  "drugName": "Itraconazole",
+  "aliases": [
+   "Sporanox",
+   "Itaspor"
+  ],
+  "description": "An antifungal.",
+  "foodToAvoid": "NA",
+  "foodToTake": "A full meal (for capsules)",
+  "timeToTake": "Take capsules straight after a full meal for the best absorption.",
+  "interactingWith": "NA",
+  "searchKey": "I"
+ },
+ {
+  "drugName": "Ketoconazole",
+  "aliases": [
+   "Nizoral"
+  ],
+  "description": "An antifungal.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "Food",
+  "timeToTake": "Take with food.",
+  "interactingWith": "Alcohol adds to the risk of liver damage.",
+  "searchKey": "K"
+ },
+ {
+  "drugName": "Levocetirizine",
+  "aliases": [
+   "Xyzal",
+   "Levocet"
+  ],
+  "description": "Relieves allergies.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Often taken in the evening.",
+  "interactingWith": "Alcohol adds to drowsiness.",
+  "searchKey": "L"
+ },
+ {
+  "drugName": "Levofloxacin",
+  "aliases": [
+   "Levaquin",
+   "Levoflox"
+  ],
+  "description": "An antibiotic for bacterial infections.",
+  "foodToAvoid": "Antacids, iron or zinc supplements at the same time",
+  "foodToTake": "Plenty of water",
+  "timeToTake": "Take at least 2 hours before or after antacids, iron or zinc.",
+  "interactingWith": "These bind to levofloxacin and stop it being absorbed.",
+  "searchKey": "L"
+ },
+ {
+  "drugName": "Levothyroxine",
+  "aliases": [
+   "Thyronorm",
+   "Eltroxin",
+   "Synthroid"
+  ],
+  "description": "Replaces thyroid hormone.",
+  "foodToAvoid": "Coffee, soy products, high-fibre foods, and calcium or iron-rich foods or supplements at the same time",
+  "foodToTake": "Water, on an empty stomach",
+  "timeToTake": "Take 30 to 60 minutes before breakfast. Wait about 4 hours before calcium or iron supplements.",
+  "interactingWith": "These foods and supplements stop the body absorbing levothyroxine properly.",
+  "searchKey": "L"
+ },
+ {
+  "drugName": "Linezolid",
+  "aliases": [
+   "Zyvox"
+  ],
+  "description": "An antibiotic for serious infections.",
+  "foodToAvoid": "Aged cheese, cured meats, soy sauce, tap beer, red wine and sauerkraut",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Take at the same times each day.",
+  "interactingWith": "These foods are high in tyramine, and with linezolid they can cause a sudden, dangerous rise in blood pressure.",
+  "searchKey": "L"
+ },
+ {
+  "drugName": "Lisinopril",
+  "aliases": [
+   "Zestril",
+   "Listril"
+  ],
+  "description": "Lowers blood pressure and protects the heart and kidneys.",
+  "foodToAvoid": "Potassium-based salt substitutes; large amounts of high-potassium foods",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Take at the same time each day.",
+  "interactingWith": "These medicines raise potassium in the blood. Salt substitutes are made of potassium chloride and can push it too high.",
+  "searchKey": "L"
+ },
+ {
+  "drugName": "Lithium",
+  "aliases": [
+   "Licab",
+   "Lithosun"
+  ],
+  "description": "Treats bipolar disorder.",
+  "foodToAvoid": "Sudden changes in salt intake; dehydration; big changes in caffeine",
+  "foodToTake": "Plenty of water and a steady amount of salt",
+  "timeToTake": "Take with food to reduce stomach upset.",
+  "interactingWith": "Low salt or dehydration raises lithium toward toxic levels, and caffeine changes how fast it leaves the body.",
+  "searchKey": "L"
+ },
+ {
+  "drugName": "Losartan",
+  "aliases": [
+   "Cozaar",
+   "Losar"
+  ],
+  "description": "Lowers blood pressure and protects the kidneys.",
+  "foodToAvoid": "Potassium-based salt substitutes; large amounts of high-potassium foods",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Take at the same time each day.",
+  "interactingWith": "These medicines raise potassium in the blood. Salt substitutes are made of potassium chloride and can push it too high.",
+  "searchKey": "L"
+ },
+ {
+  "drugName": "Metformin",
+  "aliases": [
+   "Glycomet",
+   "Glucophage"
+  ],
+  "description": "Lowers blood sugar in type 2 diabetes.",
+  "foodToAvoid": "Heavy alcohol",
+  "foodToTake": "Meals",
+  "timeToTake": "Take with or just after meals to reduce stomach upset.",
+  "interactingWith": "Heavy drinking with metformin raises the risk of lactic acidosis, a serious condition.",
+  "searchKey": "M"
+ },
+ {
+  "drugName": "Methotrexate",
+  "aliases": [
+   "Folitrax",
+   "Trexall"
+  ],
+  "description": "Treats rheumatoid arthritis, psoriasis and some cancers.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Usually taken once a week, on the same day.",
+  "interactingWith": "Alcohol increases the risk of liver damage.",
+  "searchKey": "M"
+ },
+ {
+  "drugName": "Metoclopramide",
+  "aliases": [
+   "Perinorm",
+   "Reglan"
+  ],
+  "description": "Relieves nausea and helps the stomach empty.",
+  "foodToAvoid": "NA",
+  "foodToTake": "Before a meal",
+  "timeToTake": "Take 30 minutes before meals.",
+  "interactingWith": "NA",
+  "searchKey": "M"
+ },
+ {
+  "drugName": "Metoprolol",
+  "aliases": [
+   "Betaloc",
+   "Metolar"
+  ],
+  "description": "Lowers blood pressure and slows the heart.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "With or just after food",
+  "timeToTake": "Take with or straight after a meal.",
+  "interactingWith": "Alcohol adds to the blood pressure drop and can cause dizziness.",
+  "searchKey": "M"
+ },
+ {
+  "drugName": "Metronidazole",
+  "aliases": [
+   "Flagyl",
+   "Metrogyl"
+  ],
+  "description": "An antibiotic for some infections.",
+  "foodToAvoid": "Alcohol during treatment and for at least 48 hours after the last dose",
+  "foodToTake": "Food",
+  "timeToTake": "Take with or after food to reduce nausea.",
+  "interactingWith": "Alcohol with metronidazole can cause flushing, vomiting, a racing heart and severe headache.",
+  "searchKey": "M"
+ },
+ {
+  "drugName": "Naproxen",
+  "aliases": [
+   "Naprosyn",
+   "Naprelan"
+  ],
+  "description": "Relieves pain and inflammation.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "Food or milk",
+  "timeToTake": "Take with food to reduce stomach upset.",
+  "interactingWith": "Alcohol increases the risk of stomach irritation and bleeding.",
+  "searchKey": "N"
+ },
+ {
+  "drugName": "Nifedipine",
+  "aliases": [
+   "Adalat"
+  ],
+  "description": "Lowers blood pressure and prevents angina.",
+  "foodToAvoid": "Grapefruit juice",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Swallow extended-release tablets whole.",
+  "interactingWith": "Grapefruit juice raises nifedipine levels and can drop blood pressure too far.",
+  "searchKey": "N"
+ },
+ {
+  "drugName": "Nitrofurantoin",
+  "aliases": [
+   "Macrobid",
+   "Furadantin"
+  ],
+  "description": "An antibiotic for urinary infections.",
+  "foodToAvoid": "NA",
+  "foodToTake": "Food or milk",
+  "timeToTake": "Take with food, which improves absorption and reduces nausea.",
+  "interactingWith": "NA",
+  "searchKey": "N"
+ },
+ {
+  "drugName": "Omeprazole",
+  "aliases": [
+   "Omez",
+   "Prilosec"
+  ],
+  "description": "Reduces stomach acid.",
+  "foodToAvoid": "NA",
+  "foodToTake": "An empty stomach, before a meal",
+  "timeToTake": "Take 30 to 60 minutes before breakfast.",
+  "interactingWith": "NA",
+  "searchKey": "O"
+ },
+ {
+  "drugName": "Pantoprazole",
+  "aliases": [
+   "Pan",
+   "Pantop",
+   "Protonix"
+  ],
+  "description": "Reduces stomach acid.",
+  "foodToAvoid": "NA",
+  "foodToTake": "An empty stomach, before a meal",
+  "timeToTake": "Take 30 to 60 minutes before breakfast.",
+  "interactingWith": "NA",
+  "searchKey": "P"
+ },
+ {
+  "drugName": "Paracetamol",
+  "aliases": [
+   "Acetaminophen",
+   "Dolo",
+   "Crocin",
+   "Calpol",
+   "Tylenol"
+  ],
+  "description": "Relieves pain and reduces fever.",
+  "foodToAvoid": "Alcohol (regular or heavy drinking)",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Can be taken with or without food. Leave at least 4 hours between doses.",
+  "interactingWith": "Regular heavy drinking together with paracetamol raises the risk of liver damage.",
+  "searchKey": "P"
+ },
+ {
+  "drugName": "Penicillin V",
+  "aliases": [
+   "Phenoxymethylpenicillin",
+   "Pen V"
+  ],
+  "description": "An antibiotic for bacterial infections.",
+  "foodToAvoid": "Taking it with a meal",
+  "foodToTake": "An empty stomach",
+  "timeToTake": "Take one hour before or two hours after food.",
+  "interactingWith": "Food reduces how much penicillin V is absorbed.",
+  "searchKey": "P"
+ },
+ {
+  "drugName": "Phenelzine",
+  "aliases": [
+   "Nardil"
+  ],
+  "description": "An MAOI antidepressant.",
+  "foodToAvoid": "Aged cheese, cured and fermented meats, soy sauce, tap beer, red wine and overripe fruit",
+  "foodToTake": "Fresh, properly stored food",
+  "timeToTake": "Take at the same times each day.",
+  "interactingWith": "These foods are high in tyramine, and with an MAOI they can cause a sudden, dangerous rise in blood pressure.",
+  "searchKey": "P"
+ },
+ {
+  "drugName": "Phenytoin",
+  "aliases": [
+   "Eptoin",
+   "Dilantin"
+  ],
+  "description": "Treats seizures.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "A consistent routine with meals",
+  "timeToTake": "Take at the same times each day, always the same way around food.",
+  "interactingWith": "Alcohol changes phenytoin levels and can cause seizures or toxicity.",
+  "searchKey": "P"
+ },
+ {
+  "drugName": "Potassium chloride",
+  "aliases": [
+   "KCl"
+  ],
+  "description": "Potassium supplement.",
+  "foodToAvoid": "NA",
+  "foodToTake": "Food and a full glass of water",
+  "timeToTake": "Take with food and plenty of water to reduce stomach irritation.",
+  "interactingWith": "NA",
+  "searchKey": "P"
+ },
+ {
+  "drugName": "Prednisolone",
+  "aliases": [
+   "Wysolone",
+   "Deltacortril"
+  ],
+  "description": "A steroid that reduces inflammation.",
+  "foodToAvoid": "Too much salt; alcohol",
+  "foodToTake": "Food, plus calcium and vitamin D-rich foods on long courses",
+  "timeToTake": "Take in the morning with food.",
+  "interactingWith": "Steroids make the body hold on to salt and water, so salty food works against them. Alcohol adds to stomach irritation.",
+  "searchKey": "P"
+ },
+ {
+  "drugName": "Pregabalin",
+  "aliases": [
+   "Lyrica"
+  ],
+  "description": "Treats nerve pain and seizures.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Take at the same times each day.",
+  "interactingWith": "Alcohol adds to drowsiness.",
+  "searchKey": "P"
+ },
+ {
+  "drugName": "Propranolol",
+  "aliases": [
+   "Inderal"
+  ],
+  "description": "Lowers blood pressure and slows the heart.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "The same routine every day: always with food or always without",
+  "timeToTake": "Be consistent about taking it with or without food.",
+  "interactingWith": "Food changes how much propranolol is absorbed, and alcohol adds to the blood pressure drop.",
+  "searchKey": "P"
+ },
+ {
+  "drugName": "Ramipril",
+  "aliases": [
+   "Cardace",
+   "Altace"
+  ],
+  "description": "Lowers blood pressure and protects the heart.",
+  "foodToAvoid": "Potassium-based salt substitutes; large amounts of high-potassium foods",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Take at the same time each day.",
+  "interactingWith": "These medicines raise potassium in the blood. Salt substitutes are made of potassium chloride and can push it too high.",
+  "searchKey": "R"
+ },
+ {
+  "drugName": "Repaglinide",
+  "aliases": [
+   "Prandin"
+  ],
+  "description": "Lowers blood sugar after meals.",
+  "foodToAvoid": "Skipping a meal after taking a dose; alcohol",
+  "foodToTake": "A meal soon after the dose",
+  "timeToTake": "Take 15 minutes before a meal. Skip the dose if you skip the meal.",
+  "interactingWith": "It works quickly, so taking it without eating can cause low blood sugar.",
+  "searchKey": "R"
+ },
+ {
+  "drugName": "Rifampicin",
+  "aliases": [
+   "Rifampin",
+   "R-Cin"
+  ],
+  "description": "An antibiotic used for tuberculosis.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "An empty stomach",
+  "timeToTake": "Take one hour before or two hours after a meal.",
+  "interactingWith": "Alcohol adds to the risk of liver damage.",
+  "searchKey": "R"
+ },
+ {
+  "drugName": "Rivaroxaban",
+  "aliases": [
+   "Xarelto"
+  ],
+  "description": "Prevents and treats blood clots.",
+  "foodToAvoid": "Heavy alcohol",
+  "foodToTake": "A meal, for the 15 mg and 20 mg doses",
+  "timeToTake": "Take the higher doses with a meal so enough is absorbed.",
+  "interactingWith": "Alcohol increases the risk of bleeding.",
+  "searchKey": "R"
+ },
+ {
+  "drugName": "Rosuvastatin",
+  "aliases": [
+   "Crestor",
+   "Rosuvas"
+  ],
+  "description": "Lowers cholesterol.",
+  "foodToAvoid": "Heavy alcohol",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Can be taken at any time of day.",
+  "interactingWith": "Heavy drinking adds to the liver strain statins can cause.",
+  "searchKey": "R"
+ },
+ {
+  "drugName": "Sertraline",
+  "aliases": [
+   "Zoloft",
+   "Daxid"
+  ],
+  "description": "Treats depression and anxiety.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Take at the same time each day.",
+  "interactingWith": "Alcohol can make low mood and drowsiness worse and adds to side effects.",
+  "searchKey": "S"
+ },
+ {
+  "drugName": "Sildenafil",
+  "aliases": [
+   "Viagra"
+  ],
+  "description": "Treats erectile dysfunction.",
+  "foodToAvoid": "Large fatty meals; grapefruit juice; heavy alcohol",
+  "foodToTake": "A light meal or an empty stomach",
+  "timeToTake": "Take about an hour before activity.",
+  "interactingWith": "A fatty meal can delay it working by an hour or so, grapefruit raises its levels, and alcohol lowers blood pressure.",
+  "searchKey": "S"
+ },
+ {
+  "drugName": "Simvastatin",
+  "aliases": [
+   "Zocor"
+  ],
+  "description": "Lowers cholesterol.",
+  "foodToAvoid": "Grapefruit and grapefruit juice",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Take in the evening.",
+  "interactingWith": "Grapefruit raises simvastatin levels and the chance of muscle damage.",
+  "searchKey": "S"
+ },
+ {
+  "drugName": "Sodium valproate",
+  "aliases": [
+   "Valproate",
+   "Epilex",
+   "Valparin"
+  ],
+  "description": "Treats seizures and bipolar disorder.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "Food",
+  "timeToTake": "Take with food to reduce stomach upset.",
+  "interactingWith": "Alcohol adds to drowsiness and to the strain on the liver.",
+  "searchKey": "S"
+ },
+ {
+  "drugName": "Spironolactone",
+  "aliases": [
+   "Aldactone"
+  ],
+  "description": "A water tablet that also protects the heart.",
+  "foodToAvoid": "Potassium-based salt substitutes; large amounts of high-potassium foods",
+  "foodToTake": "Food",
+  "timeToTake": "Take with food at the same time each day.",
+  "interactingWith": "These medicines raise potassium in the blood. Salt substitutes are made of potassium chloride and can push it too high.",
+  "searchKey": "S"
+ },
+ {
+  "drugName": "Sucralfate",
+  "aliases": [
+   "Sucrafil",
+   "Carafate"
+  ],
+  "description": "Protects the stomach lining and heals ulcers.",
+  "foodToAvoid": "NA",
+  "foodToTake": "An empty stomach",
+  "timeToTake": "Take one hour before meals and at bedtime.",
+  "interactingWith": "NA",
+  "searchKey": "S"
+ },
+ {
+  "drugName": "Tacrolimus",
+  "aliases": [
+   "Prograf"
+  ],
+  "description": "Prevents organ rejection.",
+  "foodToAvoid": "Grapefruit juice and pomelo",
+  "foodToTake": "An empty stomach",
+  "timeToTake": "Take one hour before or two hours after a meal.",
+  "interactingWith": "Grapefruit raises tacrolimus levels, which can damage the kidneys.",
+  "searchKey": "T"
+ },
+ {
+  "drugName": "Tamsulosin",
+  "aliases": [
+   "Flomax",
+   "Urimax"
+  ],
+  "description": "Eases urination in an enlarged prostate.",
+  "foodToAvoid": "NA",
+  "foodToTake": "The same meal every day",
+  "timeToTake": "Take 30 minutes after the same meal each day.",
+  "interactingWith": "NA",
+  "searchKey": "T"
+ },
+ {
+  "drugName": "Telmisartan",
+  "aliases": [
+   "Telma",
+   "Micardis"
+  ],
+  "description": "Lowers blood pressure.",
+  "foodToAvoid": "Potassium-based salt substitutes; large amounts of high-potassium foods",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Take at the same time each day.",
+  "interactingWith": "These medicines raise potassium in the blood. Salt substitutes are made of potassium chloride and can push it too high.",
+  "searchKey": "T"
+ },
+ {
+  "drugName": "Tetracycline",
+  "aliases": [
+   "Tetralong",
+   "Achromycin"
+  ],
+  "description": "An antibiotic for bacterial infections.",
+  "foodToAvoid": "Milk, dairy products, calcium and iron",
+  "foodToTake": "An empty stomach",
+  "timeToTake": "Take one hour before or two hours after meals.",
+  "interactingWith": "Dairy, calcium and iron bind to tetracycline and stop it being absorbed.",
+  "searchKey": "T"
+ },
+ {
+  "drugName": "Theophylline",
+  "aliases": [
+   "Deriphyllin",
+   "Theo-Asthalin"
+  ],
+  "description": "Opens the airways in asthma and COPD.",
+  "foodToAvoid": "Large amounts of caffeine (coffee, tea, cola); charcoal-grilled meat",
+  "foodToTake": "A steady, consistent diet",
+  "timeToTake": "Take at the same times each day.",
+  "interactingWith": "Caffeine raises theophylline levels, causing jitteriness and a fast heartbeat. Charcoal-grilled food can lower them.",
+  "searchKey": "T"
+ },
+ {
+  "drugName": "Tinidazole",
+  "aliases": [
+   "Tiniba",
+   "Tindamax"
+  ],
+  "description": "An antibiotic for some infections.",
+  "foodToAvoid": "Alcohol during treatment and for at least 3 days after the last dose",
+  "foodToTake": "Food",
+  "timeToTake": "Take with food to reduce nausea.",
+  "interactingWith": "Alcohol with tinidazole can cause flushing, vomiting, a racing heart and severe headache.",
+  "searchKey": "T"
+ },
+ {
+  "drugName": "Tramadol",
+  "aliases": [
+   "Ultram",
+   "Tramazac"
+  ],
+  "description": "Relieves moderate to severe pain.",
+  "foodToAvoid": "Alcohol",
+  "foodToTake": "Can be taken with or without food",
+  "timeToTake": "Take exactly as prescribed.",
+  "interactingWith": "Alcohol with tramadol can slow breathing and cause severe drowsiness.",
+  "searchKey": "T"
+ },
+ {
+  "drugName": "Tranylcypromine",
+  "aliases": [
+   "Parnate"
+  ],
+  "description": "An MAOI antidepressant.",
+  "foodToAvoid": "Aged cheese, cured and fermented meats, soy sauce, tap beer, red wine and overripe fruit",
+  "foodToTake": "Fresh, properly stored food",
+  "timeToTake": "Take at the same times each day.",
+  "interactingWith": "These foods are high in tyramine, and with an MAOI they can cause a sudden, dangerous rise in blood pressure.",
+  "searchKey": "T"
+ },
+ {
+  "drugName": "Verapamil",
+  "aliases": [
+   "Calaptin",
+   "Isoptin"
+  ],
+  "description": "Lowers blood pressure and controls heart rate.",
+  "foodToAvoid": "Grapefruit juice",
+  "foodToTake": "Food, if it upsets your stomach",
+  "timeToTake": "Take at the same time each day.",
+  "interactingWith": "Grapefruit juice raises verapamil levels, which can slow the heart too much.",
+  "searchKey": "V"
+ },
+ {
+  "drugName": "Vitamin D3",
+  "aliases": [
+   "Cholecalciferol",
+   "Calcirol",
+   "D-Rise"
+  ],
+  "description": "Vitamin D supplement.",
+  "foodToAvoid": "NA",
+  "foodToTake": "A meal that contains some fat",
+  "timeToTake": "Take with your largest meal. Fat helps the body absorb vitamin D.",
+  "interactingWith": "NA",
+  "searchKey": "V"
+ },
+ {
+  "drugName": "Warfarin",
+  "aliases": [
+   "Coumadin",
+   "Warf"
+  ],
+  "description": "Prevents blood clots.",
+  "foodToAvoid": "Sudden large changes in leafy greens (spinach, kale, broccoli); cranberry juice; heavy alcohol",
+  "foodToTake": "Keep your vitamin K foods steady from day to day",
+  "timeToTake": "Take at the same time each day, with or without food.",
+  "interactingWith": "Vitamin K helps blood clot, so big swings in how much you eat can make warfarin weaker or stronger. Cranberry juice and heavy drinking can raise bleeding risk.",
+  "searchKey": "W"
+ },
+ {
+  "drugName": "Zolpidem",
+  "aliases": [
+   "Ambien",
+   "Zolfresh"
+  ],
+  "description": "Helps with sleep.",
+  "foodToAvoid": "Alcohol; taking it just after a heavy meal",
+  "foodToTake": "An empty stomach",
+  "timeToTake": "Take right before bed, with no food just beforehand.",
+  "interactingWith": "Food slows how fast zolpidem works, and alcohol with it can slow breathing.",
+  "searchKey": "Z"
+ }
+]

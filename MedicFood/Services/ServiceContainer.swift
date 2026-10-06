@@ -49,7 +49,10 @@ final class ServiceContainer {
             medicines: MockMedicineService(),
             adherence: MockAdherenceService(),
             notifications: NotificationService(),
-            drugInfo: MockDrugInfoService(),
+            // The bundled catalogue rather than the five-drug mock: a demo
+            // that can answer for only five drugs fails the first time
+            // someone searches for anything else.
+            drugInfo: BundledDrugInfoService(),
             caretakers: MockCaretakerService()
         )
     }
@@ -68,7 +71,12 @@ final class ServiceContainer {
             medicines: FirestoreMedicineService(),
             adherence: FirestoreAdherenceService(),
             notifications: NotificationService(),
-            drugInfo: FirestoreDrugInfoService(),
+            // Firestore first; the bundled catalogue when it has nothing or
+            // cannot be read (signed out, rules, no network).
+            drugInfo: FallbackDrugInfoService(
+                primary: FirestoreDrugInfoService(),
+                fallback: BundledDrugInfoService()
+            ),
             caretakers: FirestoreCaretakerService()
         )
     }

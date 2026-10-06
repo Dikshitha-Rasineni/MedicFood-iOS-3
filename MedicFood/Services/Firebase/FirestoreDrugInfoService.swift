@@ -73,50 +73,17 @@ final class FirestoreDrugInfoService: DrugInfoServicing {
     }
 
     // MARK: - Mapping
+    //
+    // Shared with the bundled catalogue — see `DrugCatalogueMapping`.
 
     private static func drugInfo(from document: DocumentSnapshot) -> DrugInfo? {
-        let fields = FirestoreClient.normalised(document.data())
-        guard let name = value(fields["drugName"]) else { return nil }
-
-        return DrugInfo(
-            rxcui: document.documentID,
-            name: name,
-            synonym: value(fields["searchKey"]),
-            form: nil,
-            purpose: value(fields["description"]),
-            warnings: value(fields["interactingWith"]),
-            dosageGuidance: value(fields["timeToTake"])
+        DrugCatalogueMapping.drugInfo(
+            id: document.documentID,
+            fields: FirestoreClient.normalised(document.data())
         )
     }
 
     private static func interactions(from fields: [String: Any]) -> [FoodInteraction] {
-        var results: [FoodInteraction] = []
-
-        if let avoid = value(fields["foodToAvoid"]) {
-            results.append(FoodInteraction(
-                food: avoid,
-                effect: value(fields["interactingWith"]) ?? "Avoid while taking this medicine.",
-                severity: .avoid
-            ))
-        }
-        if let take = value(fields["foodToTake"]) {
-            results.append(FoodInteraction(
-                food: take,
-                effect: value(fields["timeToTake"]) ?? "Recommended while taking this medicine.",
-                severity: .minor
-            ))
-        }
-        return results
-    }
-
-    /// The catalogue's placeholders for "no data". Returning them would put
-    /// "NA" on screen as though it were a food.
-    private static func value(_ raw: Any?) -> String? {
-        guard let text = (raw as? String)?.trimmingCharacters(in: .whitespacesAndNewlines),
-              !text.isEmpty
-        else { return nil }
-
-        let placeholders: Set<String> = ["na", "n/a", "nil", "none", "-", "null"]
-        return placeholders.contains(text.lowercased()) ? nil : text
+        DrugCatalogueMapping.interactions(from: fields)
     }
 }
