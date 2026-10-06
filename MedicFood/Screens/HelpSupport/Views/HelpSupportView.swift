@@ -32,33 +32,89 @@ struct HelpSupportView: View {
         ),
     ]
 
+    @State private var expanded: UUID?
+
     var body: some View {
-        List {
-            Section("Common questions") {
-                ForEach(questions) { item in
-                    DisclosureGroup(item.question) {
-                        Text(item.answer)
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                            .padding(.vertical, 4)
+        SettingsPage(title: "Help") {
+            SettingsSection(title: "Common questions") {
+                ForEach(Array(questions.enumerated()), id: \.element.id) { index, item in
+                    if index > 0 { SettingsDivider(inset: 14) }
+                    FAQRow(
+                        question: item.question,
+                        answer: item.answer,
+                        isExpanded: expanded == item.id
+                    ) {
+                        withAnimation(Theme.Motion.cardAppear) {
+                            // Accordion: opening one closes the other, so the
+                            // list never becomes a wall of text to scroll past.
+                            expanded = expanded == item.id ? nil : item.id
+                        }
                     }
                 }
             }
 
-            Section("Get in touch") {
-                Link(destination: URL(string: "mailto:\(AppConfig.Support.email)")!) {
-                    Label(AppConfig.Support.email, systemImage: "envelope")
-                }
+            SettingsSection(title: "Get in touch") {
+                SettingsLinkRow(
+                    symbol: "envelope.fill",
+                    title: AppConfig.Support.email,
+                    url: URL(string: "mailto:\(AppConfig.Support.email)")!
+                )
             }
 
-            Section {
-                Text("MedicFood gives reminders and general information. It is not medical advice. Always follow your doctor or pharmacist.")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
+            NoticeCard(
+                symbol: "stethoscope",
+                text: "MedicFood gives reminders and general information. It is not medical advice. Always follow your doctor or pharmacist.",
+                tint: Theme.Colors.skipped
+            )
+        }
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+/// One question, with its answer revealed in place.
+///
+/// Built here rather than with `DisclosureGroup`, which draws its own chevron
+/// and spacing and cannot be brought onto the palette.
+private struct FAQRow: View {
+    var question: String
+    var answer: String
+    var isExpanded: Bool
+    var onTap: () -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Button(action: onTap) {
+                HStack(alignment: .top, spacing: 12) {
+                    Text(question)
+                        .font(Theme.Typography.body.weight(.medium))
+                        .foregroundStyle(Theme.Colors.textPrimary)
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    Spacer(minLength: 8)
+
+                    Image(systemName: "chevron.down")
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundStyle(Theme.Colors.primary)
+                        .rotationEffect(.degrees(isExpanded ? 0 : -90))
+                }
+                .padding(.horizontal, 14)
+                .padding(.vertical, 13)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(PressableCardStyle())
+
+            if isExpanded {
+                Text(answer)
+                    .font(Theme.Typography.caption)
+                    .foregroundStyle(Theme.Colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.horizontal, 14)
+                    .padding(.bottom, 14)
+                    .transition(.opacity.combined(with: .move(edge: .top)))
             }
         }
-        .navigationTitle("Help")
-        .navigationBarTitleDisplayMode(.inline)
+        .clipped()
     }
 }
 

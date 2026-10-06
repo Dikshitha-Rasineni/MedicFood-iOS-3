@@ -13,46 +13,74 @@ struct SettingsView: View {
     var body: some View {
         let model = viewModel ?? ProfileViewModel(services: services)
 
-        List {
-            Section {
-                HStack {
-                    Label("Permission", systemImage: model.notificationsAuthorized ? "bell.fill" : "bell.slash")
-                    Spacer()
-                    Text(model.notificationsAuthorized ? "Allowed" : "Not allowed")
-                        .foregroundStyle(.secondary)
+        SettingsPage(title: "Settings") {
+            SettingsSection(
+                title: "Reminders",
+                footer: "iOS allows \(AppConfig.Reminders.iosPendingLimit) scheduled reminders per app. MedicFood keeps the soonest \(AppConfig.Reminders.windowSize) registered and refreshes them each time you open it, so a long prescription is still covered."
+            ) {
+                SettingsRow(
+                    symbol: model.notificationsAuthorized ? "bell.fill" : "bell.slash.fill",
+                    title: "Permission",
+                    // The status is the point of this row, so it carries the
+                    // colour: a denied permission means no reminders at all.
+                    tint: model.notificationsAuthorized ? Theme.Colors.primary : Theme.Colors.missed
+                ) {
+                    SettingsValue(text: model.notificationsAuthorized ? "Allowed" : "Not allowed")
                 }
 
                 if !model.notificationsAuthorized {
-                    Button("Turn on reminders") {
+                    SettingsDivider()
+                    SettingsButtonRow(
+                        symbol: "bell.badge.fill",
+                        title: "Turn on reminders",
+                        subtitle: "Opens Settings so you can allow notifications"
+                    ) {
                         Task { await model.requestNotificationAccess() }
                     }
                 }
 
-                Toggle("Sound", isOn: $reminderSound)
+                SettingsDivider()
+                SettingsToggleRow(symbol: "speaker.wave.2.fill", title: "Sound", isOn: $reminderSound)
 
-                LabeledContent("Scheduled", value: "\(model.pendingReminderCount)")
-            } header: {
-                Text("Reminders")
-            } footer: {
-                Text("iOS allows \(AppConfig.Reminders.iosPendingLimit) scheduled reminders per app. MedicFood keeps the soonest \(AppConfig.Reminders.windowSize) registered and refreshes them each time you open it, so a long prescription is still covered.")
+                SettingsDivider()
+                SettingsRow(symbol: "calendar", title: "Scheduled") {
+                    SettingsValue(text: "\(model.pendingReminderCount)")
+                }
             }
 
-            Section {
-                Toggle("Share my adherence with my caretaker", isOn: $shareWithCaretaker)
-                Toggle("Send anonymous usage data", isOn: $analyticsEnabled)
-            } header: {
-                Text("Privacy")
-            } footer: {
-                Text("Your medicine data stays on this device unless you turn on caretaker sharing.")
+            SettingsSection(
+                title: "Privacy",
+                footer: "Your medicine data stays on this device unless you turn on caretaker sharing."
+            ) {
+                SettingsToggleRow(
+                    symbol: "person.2.fill",
+                    title: "Share with my caretaker",
+                    subtitle: "They see your schedule and adherence",
+                    isOn: $shareWithCaretaker
+                )
+                SettingsDivider()
+                SettingsToggleRow(
+                    symbol: "chart.bar.fill",
+                    title: "Send anonymous usage data",
+                    isOn: $analyticsEnabled
+                )
             }
 
-            Section("About") {
-                LabeledContent("Version", value: "\(AppConfig.version) (\(AppConfig.build))")
-                NavigationLink("Help and support") { HelpSupportView() }
-                NavigationLink("Privacy and security") { PrivacySecurityView() }
+            SettingsSection(title: "About") {
+                SettingsRow(symbol: "info.circle.fill", title: "Version") {
+                    SettingsValue(text: "\(AppConfig.version) (\(AppConfig.build))")
+                }
+                SettingsDivider()
+                SettingsNavigationRow(symbol: "questionmark.circle.fill", title: "Help and support") {
+                    HelpSupportView()
+                }
+                SettingsDivider()
+                SettingsNavigationRow(symbol: "lock.shield.fill", title: "Privacy and security") {
+                    PrivacySecurityView()
+                }
             }
         }
-        .navigationTitle("Settings")
+        .navigationBarTitleDisplayMode(.inline)
         .task {
             viewModel = model
             await model.refresh()

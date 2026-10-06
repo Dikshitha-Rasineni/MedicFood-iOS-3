@@ -111,6 +111,39 @@ enum Theme {
     }
 }
 
+// MARK: - System chrome
+
+extension Theme {
+    /// Bring UIKit-backed chrome onto the palette.
+    ///
+    /// `navigationTitle` renders through `UINavigationBar`, which keeps its own
+    /// black label and translucent grey no matter what SwiftUI is doing — so
+    /// every pushed screen had a black title sitting above green content.
+    /// Called once at launch.
+    @MainActor
+    static func applySystemAppearance() {
+        let navigation = UINavigationBarAppearance()
+        navigation.configureWithOpaqueBackground()
+        navigation.backgroundColor = UIColor(Colors.page)
+        navigation.shadowColor = .clear
+
+        let title = [NSAttributedString.Key.foregroundColor: UIColor(Colors.textPrimary)]
+        navigation.titleTextAttributes = title
+        navigation.largeTitleTextAttributes = title
+
+        UINavigationBar.appearance().standardAppearance = navigation
+        UINavigationBar.appearance().scrollEdgeAppearance = navigation
+        UINavigationBar.appearance().compactAppearance = navigation
+        UINavigationBar.appearance().tintColor = UIColor(Colors.primary)
+
+        let tab = UITabBarAppearance()
+        tab.configureWithOpaqueBackground()
+        tab.backgroundColor = .white
+        UITabBar.appearance().standardAppearance = tab
+        UITabBar.appearance().scrollEdgeAppearance = tab
+    }
+}
+
 // MARK: - Reusable text styles
 
 extension View {

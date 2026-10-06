@@ -11,15 +11,6 @@ struct MainTabView: View {
     @Environment(\.scenePhase) private var scenePhase
     @State private var reminders = ReminderPresenter.shared
 
-    init() {
-        // An opaque white tab bar, so content never shows through it.
-        let appearance = UITabBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .white
-        UITabBar.appearance().standardAppearance = appearance
-        UITabBar.appearance().scrollEdgeAppearance = appearance
-    }
-
     var body: some View {
         TabView {
             NavigationStack {

@@ -27,6 +27,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
             )
         }
 
+        Theme.applySystemAppearance()
         UNUserNotificationCenter.current().delegate = NotificationDelegate.shared
         return true
     }

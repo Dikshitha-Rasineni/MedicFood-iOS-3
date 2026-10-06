@@ -53,11 +53,11 @@ struct ErrorBanner: View {
             Spacer(minLength: 0)
         }
         .font(.footnote)
-        .foregroundStyle(.red)
+        .foregroundStyle(Theme.Colors.missed)
         .padding(12)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color.red.opacity(0.1))
-        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .background(Theme.Colors.missed.opacity(0.1))
+        .clipShape(RoundedRectangle(cornerRadius: Theme.Metrics.cornerRadius, style: .continuous))
     }
 }
 
@@ -71,19 +71,36 @@ struct EmptyStateView: View {
 
     var body: some View {
         VStack(spacing: 12) {
+            // The glyph sits on a tinted disc rather than floating grey on the
+            // page — an empty state should still look designed.
             Image(systemName: symbol)
-                .font(.system(size: 44))
-                .foregroundStyle(.secondary)
+                .font(.system(size: 32, weight: .medium))
+                .foregroundStyle(Theme.Colors.primary)
+                .frame(width: 72, height: 72)
+                .background(Theme.Colors.surface)
+                .clipShape(Circle())
+
             Text(title)
-                .font(.headline)
+                .font(Theme.Typography.cardTitle)
+                .tracking(Theme.Typography.cardTitleTracking)
+                .foregroundStyle(Theme.Colors.textPrimary)
+
             Text(message)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .font(Theme.Typography.caption)
+                .foregroundStyle(Theme.Colors.textSecondary.opacity(0.9))
                 .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
 
             if let actionTitle, let action {
                 Button(actionTitle, action: action)
-                    .buttonStyle(.borderedProminent)
+                    .font(Theme.Typography.body.weight(.semibold))
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 22)
+                    .frame(minHeight: 46)
+                    .background(
+                        Capsule().fill(Theme.Colors.primary)
+                    )
+                    .buttonStyle(PressableCardStyle())
                     .padding(.top, 4)
             }
         }
