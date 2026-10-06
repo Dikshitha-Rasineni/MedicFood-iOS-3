@@ -1,0 +1,68 @@
+name: CI
+
+# Builds the app and runs the unit tests on every push and pull request.
+#
+# No secrets are needed. The app runs on ServiceContainer.mock(), so there is
+# nothing to configure — if this workflow is green, a fresh clone opens in
+# Xcode and runs.
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    name: Build and test
+    runs-on: macos-15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show versions
+        # Deliberately NOT pinning an Xcode version. The runner's default Xcode
+        # is the one whose simulator runtimes are actually installed; selecting
+        # a different one leaves you with no bootable devices.
+        run: |
+          xcodebuild -version
+          swift --version
+
+      - name: Pick an available simulator
+        id: sim
+        # The set of preinstalled simulators changes with every runner image,
+        # so hardcoding "iPhone 16" breaks without warning. Ask the runner what
+        # it has and use the newest iPhone it offers.
+        run: |
+          xcrun simctl list devices available
+          UDID=$(xcrun simctl list devices available --json | jq -r 'first(.devices[][] | select(.isAvailable == true and (.name | startswith("iPhone"))) | .udid)')
+          if [ -z "$UDID" ] || [ "$UDID" = "null" ]; then
+            echo "::error::No iPhone simulator available on this runner"
+            exit 1
+          fi
+          echo "Selected simulator: $UDID"
+          echo "id=$UDID" >> "$GITHUB_OUTPUT"
+
+      - name: Build and test
+        run: |
+          xcodebuild test \
+            -project MedicFood.xcodeproj \
+            -scheme MedicFood \
+            -destination "id=${{ steps.sim.outputs.id }}" \
+            CODE_SIGNING_ALLOWED=NO \
+            -quiet
+
+      - name: Check the MVVM rule
+        # A ViewModel must never import SwiftUI. This is the project's one
+        # architectural rule, so CI enforces it rather than trusting review.
+        if: always()
+        run: |
+          if grep -rl "import SwiftUI" MedicFood/ViewModels/ 2>/dev/null; then
+            echo "::error::A ViewModel imports SwiftUI. ViewModels hold state and logic; Views decide how it looks. See README."
+            exit 1
+          fi
+          echo "No ViewModel imports SwiftUI."
