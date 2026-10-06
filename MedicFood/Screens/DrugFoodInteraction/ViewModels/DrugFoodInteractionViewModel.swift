@@ -22,7 +22,13 @@ final class DrugFoodInteractionViewModel {
     /// introduced — this just reuses `service.foodInteractions(for:)`.
     private(set) var interactionsByDrugID: [String: [FoodInteraction]] = [:]
 
+    /// Autocomplete lines for whatever is in the search box right now.
+    private(set) var suggestions: [DrugSuggestion] = []
+
     private let service: DrugInfoServicing
+    /// Cancelled and replaced on every keystroke, so only the pause after the
+    /// last one does any work.
+    private var typingTask: Task<Void, Never>?
 
     init(service: DrugInfoServicing) {
         self.service = service
@@ -38,6 +44,65 @@ final class DrugFoodInteractionViewModel {
 
     var isEmpty: Bool {
         !isSearching && results.isEmpty
+    }
+
+    // MARK: - Typing
+
+    /// Call when `query` changes. After a short pause it refreshes both the
+    /// autocomplete lines and the results behind them, so the list narrows as
+    /// you type instead of waiting for Return.
+    func queryDidChange() {
+        typingTask?.cancel()
+        let text = query.trimmingCharacters(in: .whitespaces)
+
+        typingTask = Task { [weak self] in
+            try? await Task.sleep(for: .milliseconds(150))
+            guard !Task.isCancelled, let self else { return }
+            await self.refresh(for: text)
+        }
+    }
+
+    /// Suggestions first (local, instant), then the matching results.
+    func refresh(for text: String) async {
+        guard !text.isEmpty else {
+            suggestions = []
+            await loadCatalogue()
+            return
+        }
+
+        let found = await service.suggestions(for: text, limit: 6)
+        // The user may have kept typing while that ran.
+        guard text == query.trimmingCharacters(in: .whitespaces) else { return }
+        suggestions = DrugSuggestion.pruned(found, query: text)
+
+        // Deliberately not `search()`: that flips `isSearching`, which swaps
+        // the whole list for a spinner. On every keystroke that is a flicker;
+        // here the old results stay put until the new ones arrive.
+        do {
+            let latest = try await service.search(text)
+            guard text == query.trimmingCharacters(in: .whitespaces) else { return }
+            results = latest
+            errorMessage = nil
+        } catch {
+            guard text == query.trimmingCharacters(in: .whitespaces) else { return }
+            errorMessage = error.localizedDescription
+            results = []
+        }
+    }
+
+    /// The user chose an autocomplete line.
+    func select(_ suggestion: DrugSuggestion) async {
+        typingTask?.cancel()
+        query = suggestion.completion
+        suggestions = []
+        await search()
+    }
+
+    /// The user pressed Return.
+    func submit() async {
+        typingTask?.cancel()
+        suggestions = []
+        await search()
     }
 
     func loadCatalogue() async {

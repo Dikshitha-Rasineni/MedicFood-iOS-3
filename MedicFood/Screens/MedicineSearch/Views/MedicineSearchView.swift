@@ -61,6 +61,22 @@ struct MedicineSearchView: View {
             text: Binding(get: { model.query }, set: { model.query = $0 }),
             prompt: "Medicine name"
         )
+        .searchSuggestions {
+            ForEach(model.suggestions) { suggestion in
+                VStack(alignment: .leading, spacing: 1) {
+                    Text(suggestion.title)
+                    if let subtitle = suggestion.subtitle {
+                        Text("Brand of \(subtitle)")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                // Choosing it puts the *drug's* name in the box, so a brand
+                // name the user knows searches for the generic the catalogue
+                // is keyed by.
+                .searchCompletion(suggestion.completion)
+            }
+        }
         .onChange(of: model.query) { _, _ in model.searchDebounced() }
         .navigationBarTitleDisplayMode(.inline)
         .navigationDestination(for: DrugInfo.self) { drug in

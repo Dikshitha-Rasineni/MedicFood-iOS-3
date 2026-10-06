@@ -49,3 +49,36 @@ struct FoodInteraction: Identifiable, Codable, Hashable, Sendable {
         }
     }
 }
+
+
+/// One line of autocomplete.
+///
+/// Typing "dol" should offer "Dolo", and choosing it should search for
+/// *Paracetamol* — the brand is what the user knows, the generic is what the
+/// catalogue is keyed by. So a suggestion carries what to show and, separately,
+/// what to search for.
+struct DrugSuggestion: Identifiable, Hashable, Sendable {
+    /// What matched, as shown: a drug name or one of its brand names.
+    let title: String
+    /// The drug a brand name belongs to; `nil` when `title` is the drug itself.
+    let subtitle: String?
+    /// What choosing this puts in the search box: always the drug's own name.
+    let completion: String
+
+    var id: String { title + "\u{1F}" + completion }
+
+    /// Drop suggestions with nothing left to complete.
+    ///
+    /// Once the box holds exactly "Paracetamol", offering "Paracetamol" again
+    /// is noise — and without this, picking a suggestion would immediately
+    /// summon the same suggestion back.
+    static func pruned(_ suggestions: [DrugSuggestion], query: String) -> [DrugSuggestion] {
+        let typed = query.trimmingCharacters(in: .whitespaces)
+            .folding(options: [.caseInsensitive, .diacriticInsensitive], locale: .current)
+        return suggestions.filter { suggestion in
+            let title = suggestion.title
+                .folding(options: [.caseInsensitive, .diacriticInsensitive], locale: .current)
+            return !(title == typed && suggestion.subtitle == nil)
+        }
+    }
+}

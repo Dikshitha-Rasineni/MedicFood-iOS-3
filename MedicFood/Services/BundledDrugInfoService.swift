@@ -94,6 +94,55 @@ final class BundledDrugInfoService: DrugInfoServicing {
             .sorted { $0.severity.order < $1.severity.order }
     }
 
+    /// Local and instant: autocomplete runs on every pause in typing, so it must
+    /// not touch the network — the Firestore search downloads whole documents,
+    /// inline images included.
+    ///
+    /// Each drug contributes at most one line, shown under whichever of its
+    /// names matched best: the generic name beats a brand, and a name that
+    /// *starts* with the query beats one that merely contains it.
+    func suggestions(for query: String, limit: Int) async -> [DrugSuggestion] {
+        let text = Self.fold(query)
+        guard !text.isEmpty, limit > 0 else { return [] }
+
+        var hits: [(suggestion: DrugSuggestion, rank: Int)] = []
+
+        for entry in entries {
+            let names = [entry.drugName] + (entry.aliases ?? [])
+            var best: (title: String, rank: Int)?
+
+            for (index, name) in names.enumerated() {
+                let folded = Self.fold(name)
+                let isGeneric = index == 0
+                let rank: Int
+                if folded.hasPrefix(text) {
+                    rank = isGeneric ? 0 : 1
+                } else if folded.contains(text) {
+                    rank = isGeneric ? 2 : 3
+                } else {
+                    continue
+                }
+                if best == nil || rank < best!.rank { best = (name, rank) }
+            }
+
+            guard let best else { continue }
+            hits.append((
+                DrugSuggestion(
+                    title: best.title,
+                    subtitle: best.title == entry.drugName ? nil : entry.drugName,
+                    completion: entry.drugName
+                ),
+                best.rank
+            ))
+        }
+
+        return hits
+            .sorted { ($0.rank, $0.suggestion.title.count, $0.suggestion.title)
+                    < ($1.rank, $1.suggestion.title.count, $1.suggestion.title) }
+            .prefix(limit)
+            .map(\.suggestion)
+    }
+
     // MARK: - Helpers
 
     private func info(for entry: Entry) -> DrugInfo? {
@@ -153,6 +202,15 @@ final class FallbackDrugInfoService: DrugInfoServicing {
 
     func foodInteractions(for drugName: String) async throws -> [FoodInteraction] {
         try await firstNonEmpty { try await $0.foodInteractions(for: drugName) }
+    }
+
+    /// The one place the order flips: suggestions come from the local
+    /// catalogue first. They are asked for on every pause in typing, and the
+    /// primary is a network call that can return whole documents.
+    func suggestions(for query: String, limit: Int) async -> [DrugSuggestion] {
+        let local = await fallback.suggestions(for: query, limit: limit)
+        if !local.isEmpty { return local }
+        return await primary.suggestions(for: query, limit: limit)
     }
 
     func details(rxcui: String) async throws -> DrugInfo? {

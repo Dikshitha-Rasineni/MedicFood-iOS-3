@@ -74,9 +74,7 @@ struct DrugFoodInteractionView: View {
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
                     .onSubmit {
-                        Task {
-                            await model.search()
-                        }
+                        Task { await model.submit() }
                     }
 
                     if !model.query.isEmpty {
@@ -101,6 +99,8 @@ struct DrugFoodInteractionView: View {
                 .padding(.bottom, 8)
 
                 // MARK: - Content
+                ZStack(alignment: .top) {
+                VStack(spacing: 0) {
                 if model.isSearching {
 
                     Spacer()
@@ -160,8 +160,26 @@ struct DrugFoodInteractionView: View {
                         .padding(.bottom, 30)
                     }
                 }
+                }
+
+                // Floats over the list rather than pushing it down, so the
+                // results do not jump as suggestions appear and disappear.
+                if !model.suggestions.isEmpty {
+                    DrugSuggestionList(
+                        suggestions: model.suggestions,
+                        query: model.query
+                    ) { suggestion in
+                        Task { await model.select(suggestion) }
+                    }
+                    .padding(.horizontal, Theme.Metrics.pageMargin)
+                    .padding(.top, 2)
+                    .transition(.opacity.combined(with: .move(edge: .top)))
+                }
+                }
             }
         }
+        .animation(Theme.Motion.statusChange, value: model.suggestions)
+        .onChange(of: model.query) { _, _ in model.queryDidChange() }
         .navigationBarHidden(true)
         .task {
             viewModel = model

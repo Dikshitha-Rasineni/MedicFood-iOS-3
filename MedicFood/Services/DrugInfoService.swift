@@ -6,6 +6,21 @@ protocol DrugInfoServicing: AnyObject {
     func search(_ query: String) async throws -> [DrugInfo]
     func details(rxcui: String) async throws -> DrugInfo?
     func foodInteractions(for drugName: String) async throws -> [FoodInteraction]
+
+    /// Autocomplete lines for a partly typed name. Best effort: it never
+    /// throws, because failing to suggest is not worth an error on screen.
+    func suggestions(for query: String, limit: Int) async -> [DrugSuggestion]
+}
+
+extension DrugInfoServicing {
+    /// Default: derive suggestions from a normal search. Services that can do
+    /// better cheaply — the bundled catalogue — override this.
+    func suggestions(for query: String, limit: Int) async -> [DrugSuggestion] {
+        guard let results = try? await search(query) else { return [] }
+        return results.prefix(limit).map {
+            DrugSuggestion(title: $0.name, subtitle: nil, completion: $0.name)
+        }
+    }
 }
 
 /// Sample drug data, so search works offline and in tests.

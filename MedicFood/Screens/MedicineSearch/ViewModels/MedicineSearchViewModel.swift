@@ -19,6 +19,10 @@ final class MedicineSearchViewModel {
     private let service: DrugInfoServicing
     /// Cancels the previous search when the user keeps typing.
     private var searchTask: Task<Void, Never>?
+    private var suggestTask: Task<Void, Never>?
+
+    /// Autocomplete lines for the search box.
+    private(set) var suggestions: [DrugSuggestion] = []
 
     init(service: DrugInfoServicing) {
         self.service = service
@@ -38,13 +42,32 @@ final class MedicineSearchViewModel {
     /// of order.
     func searchDebounced() {
         searchTask?.cancel()
+        suggestTask?.cancel()
         let text = query
+
+        // Suggestions are local and cheap, so they get a shorter pause than the
+        // search itself and appear while the results are still pending.
+        suggestTask = Task { [weak self] in
+            try? await Task.sleep(for: .milliseconds(120))
+            guard !Task.isCancelled else { return }
+            await self?.refreshSuggestions(for: text)
+        }
 
         searchTask = Task { [weak self] in
             try? await Task.sleep(for: .milliseconds(300))
             guard !Task.isCancelled else { return }
             await self?.search(text)
         }
+    }
+
+    func refreshSuggestions(for text: String) async {
+        let trimmed = text.trimmingCharacters(in: .whitespaces)
+        guard !trimmed.isEmpty else { suggestions = []; return }
+
+        let found = await service.suggestions(for: trimmed, limit: 6)
+        // The user may have kept typing while that ran.
+        guard trimmed == query.trimmingCharacters(in: .whitespaces) else { return }
+        suggestions = DrugSuggestion.pruned(found, query: trimmed)
     }
 
     func search(_ text: String) async {
