@@ -46,6 +46,15 @@ enum FoodInstruction: String, Codable, CaseIterable, Sendable {
 /// of fragility in the codebase" and recommended exactly this fix.
 struct Medicine: Identifiable, Codable, Hashable, Sendable {
     var id: UUID = UUID()
+
+    /// The Firestore document key this medicine came from, when it came from
+    /// the shared backend. `id` is derived from it (`FirestoreSchema.stableUUID`)
+    /// so the two never drift, and writes go back to the same key instead of
+    /// creating a duplicate the Android app would show twice.
+    ///
+    /// `nil` for a medicine created offline that has not been written yet.
+    var remoteID: String?
+
     var name: String
     var dosage: String
     var form: MedicineForm = .tablet
@@ -82,6 +91,19 @@ struct Medicine: Identifiable, Codable, Hashable, Sendable {
     var voiceFilePath: String?
 
     var isReminderOn: Bool { remindersEnabled ?? true }
+
+    /// Bind this medicine to its Firestore document, deriving `id` from the
+    /// document key so the two can never disagree.
+    ///
+    /// Call this **before** anything schedules a reminder. `Dose.id` is built
+    /// from `id`, so adopting a key later would change every dose id and
+    /// orphan notifications already registered with iOS. The live service
+    /// therefore mints the document key first and adopts it at creation, and
+    /// a medicine read back from Firestore arrives already adopted.
+    mutating func adoptRemoteID(_ remoteID: String) {
+        self.remoteID = remoteID
+        self.id = FirestoreSchema.stableUUID(from: remoteID)
+    }
 
     func minutesOfDay(for slot: DoseSlot) -> Int {
         let t = timeComponents(for: slot)
