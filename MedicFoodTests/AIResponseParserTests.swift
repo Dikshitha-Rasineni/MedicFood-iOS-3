@@ -172,6 +172,13 @@ final class AIResponseParserTests: XCTestCase {
         XCTAssertEqual(GeminiMedicineAI.map(error), .notEnabled)
     }
 
+    /// What the project returns when it requires App Check and the app has not
+    /// sent a valid token — which is the actual state of this project today.
+    func testAppCheckRejectionIsRecognised() {
+        let error = Fake(message: "BackendError(httpResponseCode: 401, message: \"Firebase App Check token is invalid.\")")
+        XCTAssertEqual(GeminiMedicineAI.map(error), .notEnabled)
+    }
+
     func testQuotaIsRecognised() {
         XCTAssertEqual(GeminiMedicineAI.map(Fake(message: "HTTP 429 RESOURCE_EXHAUSTED")), .quotaExceeded)
     }

@@ -129,6 +129,11 @@ final class GeminiMedicineAI: MedicineAIServicing {
         }
 
         let description = String(describing: error).lowercased()
+        // The project is set to require App Check, and the app is not sending a
+        // valid token. To the user that is the same as "not switched on yet".
+        if description.contains("app check") {
+            return .notEnabled
+        }
         if description.contains("firebasevertexai.googleapis.com")
             || description.contains("has not been used")
             || description.contains("is disabled") {
