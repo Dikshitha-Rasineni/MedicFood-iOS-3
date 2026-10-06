@@ -44,7 +44,21 @@ enum AppConfig {
         static let snoozeMinutes = 15
     }
 
+    /// Gemini, reached through Firebase AI Logic — see `GeminiMedicineAI`.
+    enum AI {
+        /// A fast, inexpensive model is the right one for reading text off a
+        /// page. Change it here; nothing else names a model.
+        static let modelName = "gemini-2.5-flash"
+    }
+
     enum Features {
+        /// Read prescriptions and medicine packs with Gemini, and turn dictation
+        /// into medicines. When off — or when Firebase is not configured — the
+        /// app uses its on-device reader and never mentions AI.
+        ///
+        /// Needs Firebase AI Logic enabled for the project.
+        static let geminiAI = true
+
         /// ⚠️ Gates nothing — no code reads this.
         ///
         /// It described the Flutter app's Gemini path, where the prescription

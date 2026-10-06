@@ -28,6 +28,7 @@ private struct ScannerContent: View {
             VStack(alignment: .leading, spacing: 20) {
                 imageCard
                 readButton
+                dictationCard
 
                 if model.image == nil && !model.hasRead {
                     Button("Or type the prescription instead") { model.startTyping() }
@@ -35,6 +36,9 @@ private struct ScannerContent: View {
                 }
 
                 if model.isProcessing { processingCard }
+                if let notice = model.aiNotice {
+                    NoticeCard(symbol: "info.circle.fill", text: notice, tint: Theme.Colors.skipped)
+                }
                 if let error = model.errorMessage { ErrorBanner(message: error) }
                 if model.hasRead || !model.extractedText.isEmpty { textCard }
                 if !model.drafts.isEmpty { reviewCard }
@@ -46,6 +50,7 @@ private struct ScannerContent: View {
             .padding(.bottom, 32)
         }
         .scrollDismissesKeyboard(.interactively)
+        .aiConsentAlert(model.consent)
         .background(Theme.Colors.page.ignoresSafeArea())
         .navigationTitle("Scan Prescription")
         .navigationBarTitleDisplayMode(.inline)
@@ -104,6 +109,55 @@ private struct ScannerContent: View {
         .accessibilityElement(children: .combine)
     }
 
+    /// Say the medicines instead of photographing a page.
+    private var dictationCard: some View {
+        Card {
+            VStack(alignment: .leading, spacing: 10) {
+                Text("Say it instead").sectionLabelStyle()
+
+                Button {
+                    Task { await model.toggleDictation() }
+                } label: {
+                    HStack(spacing: 10) {
+                        Image(systemName: model.dictation.isListening ? "stop.circle.fill" : "mic.circle.fill")
+                            .font(.system(size: 26))
+                            .symbolEffect(.pulse, isActive: model.dictation.isListening)
+                        Text(model.dictation.isListening ? "Listening. Tap when you are done" : "Tap and say your medicines")
+                            .font(.subheadline.weight(.semibold))
+                        Spacer(minLength: 0)
+                    }
+                    .foregroundStyle(model.dictation.isListening ? .white : Theme.Colors.primary)
+                    .padding(.horizontal, 14)
+                    .frame(maxWidth: .infinity, minHeight: Theme.Metrics.controlHeight)
+                    .background(
+                        RoundedRectangle(cornerRadius: Theme.Metrics.cornerRadius, style: .continuous)
+                            .fill(model.dictation.isListening ? Theme.Colors.primary : Theme.Colors.surface)
+                    )
+                }
+                .buttonStyle(PressableCardStyle())
+                .disabled(model.isProcessing)
+                .animation(Theme.Motion.statusChange, value: model.dictation.isListening)
+
+                if model.dictation.isListening {
+                    // The words appear as they are said, so a misheard drug
+                    // name is visible before anything is done with it.
+                    Text(model.dictation.transcript.isEmpty ? "Go ahead, I am listening..." : model.dictation.transcript)
+                        .font(Theme.Typography.body)
+                        .foregroundStyle(Theme.Colors.textPrimary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                } else {
+                    Text("For example: \"Metformin 500 mg twice a day after food for 30 days, and vitamin D once a week.\" You can correct the words before saving.")
+                        .font(.caption)
+                        .foregroundStyle(Theme.Colors.textSecondary)
+                }
+
+                if case .blocked(let message) = model.dictation.state {
+                    ErrorBanner(message: message)
+                }
+            }
+        }
+    }
+
     private var textCard: some View {
         Card {
             VStack(alignment: .leading, spacing: 10) {
@@ -123,7 +177,7 @@ private struct ScannerContent: View {
                     .font(.caption)
                     .foregroundStyle(Theme.Colors.textSecondary)
 
-                Button("Extract medicines") { model.parse() }
+                Button("Extract medicines") { Task { await model.extractFromText() } }
                     .font(.subheadline.weight(.semibold))
                     .disabled(model.extractedText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             }
@@ -136,6 +190,20 @@ private struct ScannerContent: View {
             Text("Check before saving. Tap the circle to include or exclude a medicine; every field can be edited.")
                 .font(.caption)
                 .foregroundStyle(Theme.Colors.textSecondary)
+
+            // Said every time, because it is true every time: whoever read it,
+            // a misread dose is a medication error and only the person holding
+            // the prescription can catch it.
+            if let source = model.readSource {
+                Label(
+                    source == .gemini
+                        ? "Read with Gemini AI. Check each one against your prescription."
+                        : "Read on this device. Check each one against your prescription.",
+                    systemImage: source == .gemini ? "sparkles" : "iphone"
+                )
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(Theme.Colors.primary)
+            }
 
             ForEach($model.drafts) { $draft in
                 DraftRow(draft: $draft)

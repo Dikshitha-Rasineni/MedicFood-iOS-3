@@ -30,6 +30,8 @@
 	<string>MedicFood uses the camera to scan your paper prescription and your medicine packs, so it can read the medicines off it and save photos.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Microphone access is required to record medication instructions.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>MedicFood listens while you describe your medicines, so it can turn what you say into a medicine to review and save.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>MedicFood needs access to your photos so you can pick an existing picture of a prescription.</string>
 

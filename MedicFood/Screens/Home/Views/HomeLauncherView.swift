@@ -38,6 +38,17 @@ struct HomeLauncherView: View {
                     .buttonStyle(PressableCardStyle())
 
                     NavigationLink {
+                        IdentifyMedicineView()
+                    } label: {
+                        ActionCardLabel(
+                            title: "Identify a Medicine",
+                            subtitle: "Photograph a pack to see what it is and what to eat",
+                            symbol: "pills.circle"
+                        )
+                    }
+                    .buttonStyle(PressableCardStyle())
+
+                    NavigationLink {
                         AddMedicineView(isModal: false)
                     } label: {
                         ActionCardLabel(

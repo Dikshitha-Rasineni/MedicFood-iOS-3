@@ -23,6 +23,9 @@ final class ServiceContainer {
     let notifications: NotificationScheduling
     let drugInfo: DrugInfoServicing
     let caretakers: CaretakerServicing
+    /// Reads photos and speech into medicines. Falls back to on-device reading
+    /// when no model is configured, so it is never nil.
+    let ai: MedicineAIServicing
 
     init(
         auth: AuthServicing,
@@ -30,7 +33,8 @@ final class ServiceContainer {
         adherence: AdherenceServicing,
         notifications: NotificationScheduling,
         drugInfo: DrugInfoServicing,
-        caretakers: CaretakerServicing
+        caretakers: CaretakerServicing,
+        ai: MedicineAIServicing? = nil
     ) {
         self.auth = auth
         self.medicines = medicines
@@ -38,6 +42,15 @@ final class ServiceContainer {
         self.notifications = notifications
         self.drugInfo = drugInfo
         self.caretakers = caretakers
+        self.ai = ai ?? Self.makeAI()
+    }
+
+    /// One choice for both stacks. The AI needs the network and a configured
+    /// Firebase app, not a signed-in user, so it is available in demo mode too —
+    /// otherwise the demo could never show it.
+    private static func makeAI() -> MedicineAIServicing {
+        let gemini = GeminiMedicineAI()
+        return gemini.isAvailable ? gemini : UnavailableMedicineAI()
     }
 
     /// Runs entirely on-device with seeded data. No backend, no secrets, no

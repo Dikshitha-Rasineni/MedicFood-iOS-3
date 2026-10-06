@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E1E7737130750C0B00B00234 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E1E7737030750C0B00B00234 /* FirebaseAuth */; };
 		E1E7737330750C1F00B00234 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E1E7737230750C1F00B00234 /* FirebaseFirestore */; };
+		E1E7737530750C2F00B00234 /* FirebaseAI in Frameworks */ = {isa = PBXBuildFile; productRef = E1E7737430750C2F00B00234 /* FirebaseAI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 			files = (
 				E1E7737130750C0B00B00234 /* FirebaseAuth in Frameworks */,
 				E1E7737330750C1F00B00234 /* FirebaseFirestore in Frameworks */,
+				E1E7737530750C2F00B00234 /* FirebaseAI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +469,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E1E7736E30750AF400B00234 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		E1E7737430750C2F00B00234 /* FirebaseAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E1E7736E30750AF400B00234 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

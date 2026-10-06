@@ -199,3 +199,23 @@ This repo was a Flutter port of the Android app
 native SwiftUI in August 2026. The Flutter sources are not in the working tree
 any more; they remain in this repository's git history and in the upstream
 Android repo.
+
+---
+
+## AI features (Gemini)
+
+Three things use Gemini: reading a photographed prescription, turning a spoken
+or typed description into medicines, and reading the label on a medicine pack.
+
+- **No API key is in the app.** Requests go through Firebase AI Logic to your
+  Firebase project, which holds the credential.
+- **One-time setup:** in the Firebase console for `medicfood-84cbf`, open
+  **Build → AI Logic → Get started** and choose the **Gemini Developer API**.
+  Until that is done every call fails and the app quietly reads on the device
+  instead, with a note saying so.
+- **Nothing is sent until the user agrees.** The first use asks; the answer is
+  remembered and can be changed in Settings.
+- **Food and drink advice never comes from the model.** It comes from the
+  bundled catalogue (`drug_food_catalogue.json`). The model only reads.
+- Everything it reads is a draft the user checks before anything is saved.
+- Change the model in one place: `AppConfig.AI.modelName`.

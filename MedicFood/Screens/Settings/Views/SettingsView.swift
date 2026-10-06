@@ -9,6 +9,7 @@ struct SettingsView: View {
     @AppStorage("settings.analytics") private var analyticsEnabled = false
 
     @State private var viewModel: ProfileViewModel?
+    @State private var aiDecision = AIConsentStore().decision
 
     var body: some View {
         let model = viewModel ?? ProfileViewModel(services: services)
@@ -64,6 +65,21 @@ struct SettingsView: View {
                     title: "Send anonymous usage data",
                     isOn: $analyticsEnabled
                 )
+                if services.ai.isAvailable {
+                    SettingsDivider()
+                    SettingsToggleRow(
+                        symbol: "sparkles",
+                        title: "Read with Gemini AI",
+                        subtitle: "Photos and text you scan are sent to Google to be read. Off keeps it on this device.",
+                        isOn: Binding(
+                            get: { aiDecision == .allowed },
+                            set: { allowed in
+                                aiDecision = allowed ? .allowed : .declined
+                                AIConsentStore().decision = aiDecision
+                            }
+                        )
+                    )
+                }
             }
 
             SettingsSection(title: "About") {
