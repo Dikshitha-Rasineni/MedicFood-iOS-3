@@ -51,12 +51,31 @@ struct SignInView: View {
                     }
                 }
 
+                StaggeredAppear(index: 2) {
+                    HStack {
+                        Spacer()
+                        Button("Forgot password?") {
+                            focusedField = nil
+                            Task { await model.sendPasswordReset() }
+                        }
+                        .font(.footnote.weight(.medium))
+                        .foregroundStyle(Theme.Colors.primary)
+                        .disabled(!model.canResetPassword)
+                        .opacity(model.canResetPassword ? 1 : 0.5)
+                    }
+                }
+
+                if let sent = model.resetMessage {
+                    NoticeCard(symbol: "envelope.badge.fill", text: sent)
+                        .transition(.move(edge: .top).combined(with: .opacity))
+                }
+
                 if let error = model.errorMessage {
                     ErrorBanner(message: error)
                         .transition(.move(edge: .top).combined(with: .opacity))
                 }
 
-                StaggeredAppear(index: 2) {
+                StaggeredAppear(index: 3) {
                     AuthSubmitButton(
                         title: "Sign in",
                         isLoading: model.isSubmitting,
@@ -66,7 +85,7 @@ struct SignInView: View {
                     }
                 }
 
-                StaggeredAppear(index: 3) {
+                StaggeredAppear(index: 4) {
                     Button(action: onCreateAccount) {
                         HStack(spacing: 4) {
                             Text("New here?")
@@ -80,13 +99,14 @@ struct SignInView: View {
                     .buttonStyle(PressableCardStyle())
                 }
 
-                StaggeredAppear(index: 4) { demoSection }
+                StaggeredAppear(index: 5) { demoSection }
 
                 Spacer(minLength: 8)
             }
             .padding(.horizontal, 24)
             .padding(.bottom, 24)
             .animation(Theme.Motion.statusChange, value: model.errorMessage)
+            .animation(Theme.Motion.statusChange, value: model.resetMessage)
         }
         .background(Theme.Colors.page)
         .scrollDismissesKeyboard(.interactively)

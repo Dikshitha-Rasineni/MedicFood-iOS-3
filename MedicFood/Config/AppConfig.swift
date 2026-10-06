@@ -45,9 +45,16 @@ enum AppConfig {
     }
 
     enum Features {
-        /// The AI prescription scanner needs a Gemini key, which is not in the
-        /// repo. The screen still works — it just parses typed text instead of
-        /// a photo until this is on.
+        /// ⚠️ Gates nothing — no code reads this.
+        ///
+        /// It described the Flutter app's Gemini path, where the prescription
+        /// *image* was sent to `gemini-1.5-pro` for structured extraction. This
+        /// app does not do that: scanning runs on Apple's Vision framework
+        /// on-device, needs no key, and is not switched off by this flag.
+        ///
+        /// If a Gemini step is ever added it must live behind a server
+        /// endpoint — an API key shipped in an iOS binary is readable by
+        /// anyone who downloads the app.
         static let aiPrescriptionScanning = false
 
         static let caretakerLinking = true

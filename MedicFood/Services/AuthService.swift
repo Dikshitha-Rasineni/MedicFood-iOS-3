@@ -11,6 +11,10 @@ protocol AuthServicing: AnyObject {
     func signUp(name: String, email: String, password: String) async throws -> UserProfile
     func signOut() async throws
 
+    /// Send a password-reset email. Without this, a forgotten password is a
+    /// permanently locked account — there is no other way back in.
+    func sendPasswordReset(to email: String) async throws
+
     /// Whether this service keeps its own session that the cached profile must
     /// agree with. False for the mock stack, which has no backend to disagree
     /// with.
@@ -24,6 +28,10 @@ extension AuthServicing {
     // Defaults so the mock stack — and any test double — is unaffected.
     var validatesSession: Bool { false }
     var currentUserID: String? { nil }
+
+    /// The mock stack has no mail to send; it succeeds so the UI flow is
+    /// exercisable on sample data.
+    func sendPasswordReset(to email: String) async throws {}
 }
 
 /// In-memory auth for development and tests.

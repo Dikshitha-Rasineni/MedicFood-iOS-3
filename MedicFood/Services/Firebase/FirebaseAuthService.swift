@@ -55,6 +55,14 @@ final class FirebaseAuthService: AuthServicing {
         try Auth.auth().signOut()
     }
 
+    func sendPasswordReset(to email: String) async throws {
+        do {
+            try await Auth.auth().sendPasswordReset(withEmail: email)
+        } catch {
+            throw Self.friendlyError(error, email: email)
+        }
+    }
+
     // MARK: - Profile
 
     /// Read the Firestore user document, falling back to what the auth record

@@ -53,6 +53,35 @@ final class SignInViewModel {
         mode == .signUp && !confirmPassword.isEmpty && confirmPassword != credentials.password
     }
 
+    /// Set when a reset email has been sent, so the view can confirm it.
+    private(set) var resetMessage: String?
+
+    var canResetPassword: Bool {
+        !isSubmitting && credentials.email.contains("@") && credentials.email.contains(".")
+    }
+
+    func sendPasswordReset() async {
+        guard canResetPassword else {
+            errorMessage = "Enter your email address first."
+            return
+        }
+
+        isSubmitting = true
+        errorMessage = nil
+        resetMessage = nil
+        defer { isSubmitting = false }
+
+        do {
+            try await auth.sendPasswordReset(to: credentials.email)
+            // Deliberately the same message whether or not the account exists:
+            // a different one would let anyone test which emails are
+            // registered.
+            resetMessage = "If an account exists for \(credentials.email), a reset link is on its way."
+        } catch {
+            errorMessage = (error as? APIError)?.errorDescription ?? error.localizedDescription
+        }
+    }
+
     func toggleMode() {
         mode = mode == .signIn ? .signUp : .signIn
         errorMessage = nil

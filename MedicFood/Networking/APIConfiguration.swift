@@ -1,5 +1,17 @@
 import Foundation
 
+// ⚠️ UNUSED. This whole folder describes a REST backend the app does not have.
+//
+// MedicFood talks to Firebase: Firestore documents through
+// `Services/Firebase/`, not HTTP endpoints through here. Nothing in `Screens/`
+// or `Services/` imports `APIService`, `HTTPRequestManager`, `APIEndpoint` or
+// `APIConfiguration`, and the hosts below do not resolve.
+//
+// It is kept only because the team may still move to its own server. If that
+// is not happening, delete `MedicFood/Networking/` and
+// `NETWORKING_ARCHITECTURE.md` — a scaffold for an architecture the app does
+// not use costs more in confusion than it saves in typing.
+
 /// Which backend the app talks to.
 ///
 /// Selecting an environment is a build-time or debug-menu concern, never
