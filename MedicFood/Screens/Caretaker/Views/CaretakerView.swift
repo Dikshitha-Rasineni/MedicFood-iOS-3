@@ -79,7 +79,7 @@ struct CaretakerView: View {
                                 CaretakerSection(
                                     title: "Needs attention",
                                     symbol: "exclamationmark.triangle.fill",
-                                    tint: .orange
+                                    tint: Theme.Colors.skipped
                                 ) {
                                     ForEach(model.needingAttention) { patient in
                                         NavigationLink {
@@ -202,65 +202,77 @@ private struct PatientCard: View {
         Theme.Colors.adherence(patient.adherenceRate)
     }
 
+    private var dayProgress: Double {
+        patient.dosesToday == 0 ? 0 : Double(patient.takenToday) / Double(patient.dosesToday)
+    }
+
     var body: some View {
 
-        HStack(alignment: .center, spacing: 14) {
+        VStack(spacing: 12) {
 
-            Text(patient.initials)
-                .font(.system(size: 16, weight: .bold))
-                .foregroundStyle(.white)
-                .frame(width: 48, height: 48)
-                .background(adherenceTint, in: Circle())
+            HStack(alignment: .center, spacing: 14) {
 
-            VStack(alignment: .leading, spacing: 4) {
+                // The avatar is identity, so it stays one colour. Colouring it
+                // by adherence made the same person change colour week to week.
+                Text(patient.initials)
+                    .font(Theme.Typography.numeral(16))
+                    .foregroundStyle(.white)
+                    .frame(width: 46, height: 46)
+                    .background(Theme.Colors.primary, in: Circle())
 
-                Text(patient.name)
-                    .font(.system(size: 17, weight: .semibold))
-                    .foregroundStyle(Theme.Colors.textPrimary)
-                    .lineLimit(1)
+                VStack(alignment: .leading, spacing: 3) {
 
-                Text("\(patient.takenToday) of \(patient.dosesToday) taken today")
-                    .font(.system(size: 13))
-                    .foregroundStyle(Theme.Colors.textSecondary)
+                    Text(patient.name)
+                        .font(Theme.Typography.cardTitle)
+                        .tracking(Theme.Typography.cardTitleTracking)
+                        .foregroundStyle(Theme.Colors.textPrimary)
+                        .lineLimit(1)
 
-                if let last = patient.lastActive {
-                    Text("Active \(last.timeAgoDescription)")
-                        .font(.system(size: 12))
-                        .foregroundStyle(Theme.Colors.textSecondary.opacity(0.75))
+                    Text("\(patient.takenToday) of \(patient.dosesToday) taken today")
+                        .font(Theme.Typography.caption)
+                        .foregroundStyle(Theme.Colors.textSecondary)
+
+                    if let last = patient.lastActive {
+                        Text("Active \(last.timeAgoDescription)")
+                            .font(.caption2)
+                            .foregroundStyle(Theme.Colors.textSecondary.opacity(0.75))
+                    }
                 }
-            }
 
-            Spacer(minLength: 8)
+                Spacer(minLength: 8)
 
-            VStack(alignment: .trailing, spacing: 4) {
-
-                Text("\(Int(patient.adherenceRate * 100))%")
-                    .font(.system(size: 17, weight: .bold))
-                    .foregroundStyle(adherenceTint)
+                // A small ring carries the rate; the numeral inside it stays in
+                // ink, so the colour is on the mark rather than on the text.
+                ProgressRing(rate: patient.adherenceRate, lineWidth: 5, size: 46) {
+                    Text("\(Int(patient.adherenceRate * 100))")
+                        .font(Theme.Typography.numeral(14))
+                        .foregroundStyle(Theme.Colors.textPrimary)
+                }
 
                 Image(systemName: "chevron.right")
                     .font(.system(size: 12, weight: .semibold))
-                    .foregroundStyle(Theme.Colors.textSecondary.opacity(0.5))
+                    .foregroundStyle(Theme.Colors.decorative)
             }
+
+            // Today at a glance, under the summary it describes.
+            GeometryReader { geo in
+                ZStack(alignment: .leading) {
+                    Capsule().fill(Theme.Colors.surface)
+                    Capsule()
+                        .fill(adherenceTint)
+                        .frame(width: max(2, geo.size.width * dayProgress))
+                }
+            }
+            .frame(height: 6)
         }
-        .padding(16)
+        .padding(15)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            LinearGradient(
-                colors: [
-                    Theme.Colors.cardSurface,
-                    Theme.Colors.primary.opacity(0.035)
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            ),
-            in: RoundedRectangle(cornerRadius: 20)
+        .background(Theme.Colors.cardSurface, in: RoundedRectangle(cornerRadius: Theme.Metrics.cornerRadius, style: .continuous))
+        .shadow(
+            color: Theme.Metrics.shadow.color,
+            radius: Theme.Metrics.shadow.radius,
+            y: Theme.Metrics.shadow.y
         )
-        .overlay(
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(Theme.Colors.primary.opacity(0.08), lineWidth: 1)
-        )
-        .shadow(color: .black.opacity(0.04), radius: 6, y: 2)
     }
 }
 
@@ -328,7 +340,7 @@ private struct PatientDetailView: View {
                             symbol: "exclamationmark.triangle.fill",
                             label: "Status",
                             value: "Needs attention",
-                            tint: .orange
+                            tint: Theme.Colors.skipped
                         )
                     }
                 }
