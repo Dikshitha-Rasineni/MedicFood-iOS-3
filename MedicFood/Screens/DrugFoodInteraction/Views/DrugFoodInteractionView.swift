@@ -9,6 +9,7 @@ fileprivate let headerBarHeight: CGFloat = 52
 struct DrugFoodInteractionView: View {
 
     @Environment(ServiceContainer.self) private var services
+    @Environment(\.dismiss) private var dismiss
     @State private var viewModel: DrugFoodInteractionViewModel?
 
     var body: some View {
@@ -22,7 +23,23 @@ struct DrugFoodInteractionView: View {
             VStack(spacing: 0) {
 
                 // MARK: - Green Header Banner
-                HStack(alignment: .center) {
+                HStack(alignment: .center, spacing: 14) {
+
+                    // The system bar is hidden on this screen, which took its
+                    // back button with it — so the header draws its own, the
+                    // same one the detail screen uses.
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundStyle(.white)
+                            // The glyph is small; the tap target should not be.
+                            .frame(width: 44, height: 44)
+                            .contentShape(Rectangle())
+                    }
+                    .accessibilityLabel("Back")
+                    .padding(.leading, -12)
 
                     Text("Drug-Food Interactions")
                         .font(.system(size: 19, weight: .bold))
