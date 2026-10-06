@@ -13,7 +13,11 @@ struct MedicFoodApp: App {
     /// The one composition root. Which stack it builds is decided by
     /// `AppConfig.backend` — flip that to `.live` for the real Firebase
     /// backend, leave it `.mock` to demo on sample data.
-    @State private var services = ServiceContainer.current()
+    ///
+    /// Held by `AppServices` rather than directly, because entering the demo
+    /// swaps the whole stack at runtime. Reading `appServices.container` here
+    /// is what re-renders every screen with the new one.
+    @State private var appServices = AppServices()
 
     @State private var session = UserSession()
 
@@ -21,7 +25,8 @@ struct MedicFoodApp: App {
         WindowGroup {
             RootView()
                 .preferredColorScheme(.light)
-                .environment(services)
+                .environment(appServices)
+                .environment(appServices.container)
                 .environment(session)
         }
     }
@@ -57,7 +62,8 @@ struct RootView: View {
                     SplashView { splashFinished = true }
                 case .signedOut:
                     if hasSeenTour {
-                        SignInView()
+                        AuthFlowView()
+                            .transition(.opacity.combined(with: .move(edge: .trailing)))
                     } else {
                         FeatureTourView()
                     }

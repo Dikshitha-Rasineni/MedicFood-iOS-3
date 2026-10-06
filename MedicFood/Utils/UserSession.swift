@@ -81,6 +81,17 @@ final class UserSession {
         }
     }
 
+    /// Sign in to the demo without touching any backend.
+    ///
+    /// Deliberately not written to disk: a demo should end when the app does.
+    /// Persisting it would also be restored on a later launch *after* someone
+    /// switched to the live backend, putting them in a signed-in session that
+    /// Firebase knows nothing about.
+    func signInToDemo(_ profile: UserProfile) {
+        defaults.removeObject(forKey: Self.profileKey)
+        state = .signedIn(profile)
+    }
+
     func signOut() {
         state = .signedOut
         defaults.removeObject(forKey: Self.profileKey)

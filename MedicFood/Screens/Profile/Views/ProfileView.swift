@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @Environment(AppServices.self) private var appServices
     @Environment(ServiceContainer.self) private var services
     @Environment(UserSession.self) private var session
 
@@ -100,6 +101,10 @@ struct ProfileView: View {
                 Task {
                     await model.signOut()
                     session.signOut()
+                    // Leaving the demo restores whatever AppConfig.backend
+                    // selects, so signing out of it lands on a real sign-in
+                    // screen rather than a second demo session.
+                    appServices.leaveDemo()
                 }
             }
             Button("Cancel", role: .cancel) {}

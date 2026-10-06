@@ -16,28 +16,41 @@ final class SignInViewModel {
         }
     }
 
-    var mode: Mode = .signIn
+    var mode: Mode
     var name = ""
     var credentials = Credentials()
+    /// Only used when creating an account, where a typo in a password you
+    /// cannot see locks you out of your own medicines.
+    var confirmPassword = ""
 
     private(set) var isSubmitting = false
     private(set) var errorMessage: String?
 
     private let auth: AuthServicing
 
-    init(auth: AuthServicing) {
+    init(auth: AuthServicing, mode: Mode = .signIn) {
         self.auth = auth
+        self.mode = mode
     }
 
-    convenience init(services: ServiceContainer) {
-        self.init(auth: services.auth)
+    convenience init(services: ServiceContainer, mode: Mode = .signIn) {
+        self.init(auth: services.auth, mode: mode)
     }
 
     /// Whether the button should be enabled.
     var canSubmit: Bool {
         guard !isSubmitting, credentials.isValid else { return false }
-        if mode == .signUp { return !name.trimmingCharacters(in: .whitespaces).isEmpty }
+        if mode == .signUp {
+            return !name.trimmingCharacters(in: .whitespaces).isEmpty
+                && confirmPassword == credentials.password
+        }
         return true
+    }
+
+    /// Shown under the confirm field as the user types, rather than only after
+    /// they press the button.
+    var passwordMismatch: Bool {
+        mode == .signUp && !confirmPassword.isEmpty && confirmPassword != credentials.password
     }
 
     func toggleMode() {
@@ -52,7 +65,9 @@ final class SignInViewModel {
     /// testable without a UI.
     func submit() async -> UserProfile? {
         guard canSubmit else {
-            errorMessage = credentials.validationMessage
+            errorMessage = mode == .signUp && confirmPassword != credentials.password
+                ? "Those passwords do not match."
+                : credentials.validationMessage
             return nil
         }
 
