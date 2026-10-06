@@ -33,3 +33,6 @@ Carthage/Build/
 GoogleService-Info.plist
 *.xcconfig.local
 Secrets.plist
+
+# Claude Code session data — never commit
+.claude/

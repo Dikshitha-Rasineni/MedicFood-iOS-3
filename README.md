@@ -28,7 +28,8 @@ six characters or more.
 ```
 MedicFood.xcodeproj
 MedicFood/
-├── App/            App entry point and lifecycle
+├── MedicFoodApp.swift  App entry point
+├── App/            App lifecycle (AppDelegate)
 ├── Config/         Constants and feature switches
 ├── Screens/        Feature-based screens using MVVM + Models structure
 │   ├── Splash/              Splash View/ViewModel/Models
@@ -39,6 +40,7 @@ MedicFood/
 │   ├── AddMedicine/         Add or edit medicine details
 │   ├── PrescriptionScanner/ Scan prescriptions using shorthand/AI
 │   ├── MedicineSearch/      Drug interactions search and lookup
+│   ├── DrugFoodInteraction/ Drug-food interaction search and detail
 │   ├── Adherence/           Adherence tracking charts and streaks
 │   ├── Caretaker/           Caretaker linking and dashboard view
 │   └── Profile/             User profile, settings, help, and privacy
