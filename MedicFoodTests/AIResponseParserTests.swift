@@ -82,6 +82,14 @@ final class AIResponseParserTests: XCTestCase {
         XCTAssertEqual(medicine.food, .anyTime)
     }
 
+    /// Seen live: the schema forces a form, and the model answered "other" for
+    /// metformin because the person never said one.
+    func testOtherMeansUnknownAndFallsToTablet() throws {
+        let json = #"{"medicines":[{"name":"Metformin","form":"other"}]}"#
+        let medicine = try XCTUnwrap(AIResponseParser.prescription(from: json).medicines.first)
+        XCTAssertEqual(medicine.form, .tablet)
+    }
+
     func testLooseWordingStillMapsToTheRightForm() throws {
         let json = #"{"medicines":[{"name":"A","form":"Syrup"},{"name":"B","form":"Cap"}]}"#
         let medicines = try AIResponseParser.prescription(from: json).medicines

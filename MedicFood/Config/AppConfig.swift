@@ -48,7 +48,15 @@ enum AppConfig {
     enum AI {
         /// A fast, inexpensive model is the right one for reading text off a
         /// page. Change it here; nothing else names a model.
-        static let modelName = "gemini-2.5-flash"
+        ///
+        /// Tried against this project on 2026-10-06 through the real SDK path:
+        /// `gemini-2.5-flash` is retired for new projects (404);
+        /// `gemini-flash-latest` resolves to `gemini-3.8-flash`, which was
+        /// overloaded (500s, timeouts) and has a free quota of only 20 requests
+        /// a day; `gemini-3.1-flash-lite` answered every call in 6–10 seconds.
+        /// A pinned name can be retired the way 2.5 was — if every AI call
+        /// starts failing, check this first.
+        static let modelName = "gemini-3.1-flash-lite"
     }
 
     enum Features {

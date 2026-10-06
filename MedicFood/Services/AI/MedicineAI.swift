@@ -211,7 +211,12 @@ enum AIResponseParser {
 
     /// The model is given the exact words, but is not trusted to use them.
     private static func form(from text: String) -> MedicineForm? {
-        if let exact = MedicineForm(rawValue: text.trimmingCharacters(in: .whitespaces).lowercased()) {
+        let word = text.trimmingCharacters(in: .whitespaces).lowercased()
+        // The response schema makes the model pick a form even when none was
+        // stated, and it picks "other" to mean "I don't know" — which put
+        // metformin down as form "Other". Unknown falls to the default instead.
+        if word == "other" { return nil }
+        if let exact = MedicineForm(rawValue: word) {
             return exact
         }
         let guess = PrescriptionParser.form(from: text)
